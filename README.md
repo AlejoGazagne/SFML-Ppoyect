@@ -3,7 +3,8 @@
 [Documento de Especificación](docs/especificacion.md)
 
 ### Integrantes: 
-[Alejo Gazagne, ](https://github.com/AlejoGazagne) [Lautaro Niccolini, ](https://github.com/Lauti00) [Eduardo Friesen]()
+[Alejo Gazagne, ](https://github.com/AlejoGazagne) [Lautaro Niccolini, ](https://github.com/Lauti00) [Eduardo Friesen](https://github.com/EduardoFriesen)
+
 
 ![IUA](https://www.fullaviacion.com.ar/wp-content/uploads/2019/02/IUA.jpg)
 
