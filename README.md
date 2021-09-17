@@ -1,10 +1,12 @@
-# Título Proyecto
+# Proyecto
 
 [Documento de Especificación](docs/especificacion.md)
 
-### Integrantes:
+### Integrantes: 
+[Alejo Gazagne, ](https://github.com/AlejoGazagne) [Lautaro Niccolini, ](https://github.com/Lauti00) [Eduardo Friesen](https://github.com/EduardoFriesen)
 
-![octocat](https://github.com/octocat.png?size=70) [Octogato](https://github.com/octocat)
+
+![IUA](https://www.fullaviacion.com.ar/wp-content/uploads/2019/02/IUA.jpg)
 
 ## Descripción:
 *breve descripción del proyecto*
