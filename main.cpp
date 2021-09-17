@@ -36,6 +36,9 @@ int main() {
         window.draw(shape);
         window.draw(image);
         window.display();
+        //asdasdasdasdasd
+        //asdasdasdasdasdas
+        //asdasdasdasdasdasdas
     }
     return 0;
 }
