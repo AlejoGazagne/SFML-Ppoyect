@@ -8,7 +8,7 @@ int main() {
     sf::Texture texture;
     sf::Sprite image;
 
-    if (!texture.loadFromFile("assets/image.png")) {
+    if (!texture.loadFromFile("../assets/image.png")) {
         std::cout << "Error al cargar textura, verifique la ruta";
         return EXIT_FAILURE;
     }
