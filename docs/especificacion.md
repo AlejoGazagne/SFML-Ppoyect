@@ -7,7 +7,7 @@
 
 **Nombre del juego**: Archers
 
-**Descripción del juego**: Juego de shooter en dimensión 2D, en el cual combatiras contra tu oponente,demostrando quién es el mejor tirador y el más escurridizo.
+**Descripción del juego**: Juego de shooter en dimensión 2D, en el cual combatiras contra tu oponente demostrando quién es el mejor tirador y el más escurridizo.
 
 **Descripción del jugador**: Apto para adolescentes mayores de 13 años, que quieran disfrutar de una divertida experiencia de lucha inspirada en los cuentos de la era medieval.
 
