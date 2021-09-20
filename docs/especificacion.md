@@ -1,4 +1,4 @@
-# Título: Plantilla-proyecto
+# Título: SFML-Proyect 
 
 | Documento de Especificación |        |
 |-----------------------------|--------|
