@@ -1,23 +1,32 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+#include "Clases/personaje1.h"
+
 int main() {
 
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Proyecto Info II");
-    sf::CircleShape shape(100.f);
-    sf::Texture texture;
-    sf::Sprite image;
+    sf::RenderWindow window(sf::VideoMode(1531, 851), "Proyecto Info II");
+    window.setFramerateLimit(60);
+    sf::Texture texture1;
+    sf::Sprite image1;
 
-    if (!texture.loadFromFile("../assets/image.png")) {
+    if (!texture1.loadFromFile("../assets/Mapa.png")) {
         std::cout << "Error al cargar textura, verifique la ruta";
         return EXIT_FAILURE;
     }
-    image.setTexture(texture);
-    image.setPosition((800 - 680) / 2, 0);
+    image1.setTexture(texture1);
+    image1.setPosition(-10, 0);
 
-    window.setFramerateLimit(30);
-    shape.setFillColor(sf::Color::Green);
-    shape.setPosition((800 - 200) / 2, 300);
+    sf::Texture texture;
+    sf::Sprite image;
+    if (!texture.loadFromFile("../assets/personaje.png")) {
+        std::cout << "Error al cargar textura, verifique la ruta";
+        return EXIT_FAILURE;
+    }
+    //image.setTexture(texture);
+    //image.setPosition(-10, 0);
+
+    Personaje1 player1(100, 100, texture);
 
     // Main loop
     while (window.isOpen()) {
@@ -30,15 +39,19 @@ int main() {
         // Update world parameters
 
         // player.move(3,4);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+            player1.moverDerecha();
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
+            player1.moverIzquierda();
+        }
 
         // Draw all elements
         window.clear();
-        window.draw(shape);
-        window.draw(image);
+        window.draw(image1);
+        player1.dibujar(window);
         window.display();
-        //asdasdasdasdasd
-        //asdasdasdasdasdas
-        //asdasdasdasdasdasdas
+
     }
-    return 0;
+    return EXIT_SUCCESS;
 }
