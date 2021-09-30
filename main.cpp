@@ -5,28 +5,28 @@
 
 int main() {
 
-    sf::RenderWindow window(sf::VideoMode(1531, 851), "Proyecto Info II");
+    sf::RenderWindow window(sf::VideoMode(1536, 990), "Proyecto Info II");
     window.setFramerateLimit(60);
     sf::Texture texture1;
     sf::Sprite image1;
 
-    if (!texture1.loadFromFile("../assets/Mapa.png")) {
+    if (!texture1.loadFromFile("../assets/mapa1Final.png")) {
         std::cout << "Error al cargar textura, verifique la ruta";
         return EXIT_FAILURE;
     }
     image1.setTexture(texture1);
-    image1.setPosition(-10, 0);
+    image1.setPosition(0, 0);
 
     sf::Texture texture;
     sf::Sprite image;
-    if (!texture.loadFromFile("../assets/personaje.png")) {
+    if (!texture.loadFromFile("../assets/PJ.png")) {
         std::cout << "Error al cargar textura, verifique la ruta";
         return EXIT_FAILURE;
     }
-    //image.setTexture(texture);
+    image.setTexture(texture);
     //image.setPosition(-10, 0);
 
-    Personaje1 player1(100, 100, texture);
+    Personaje1 player1(200, 680, texture);
 
     // Main loop
     while (window.isOpen()) {
