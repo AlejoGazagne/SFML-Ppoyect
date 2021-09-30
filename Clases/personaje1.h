@@ -2,7 +2,7 @@
 #define PROYECTO_INFOII_PERSONAJE1_H
 
 #include <SFML/Graphics.hpp>
-
+////////////sadasdasdasda
 class Personaje1 {
     int x, y;
     int velx, vely;
