@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-#include "Clases/personaje1.h"
+#include "Clases/personaje.h"
 
 int main() {
     //Crear ventana y mostrar el mapa
@@ -11,33 +11,27 @@ int main() {
     sf::Sprite image1;
 
     if (!texture1.loadFromFile("../assets/mapa1Final.png")) {
-        std::cout << "Error al cargar textura, verifique la ruta";
         return EXIT_FAILURE;
     }
     image1.setTexture(texture1);
-    image1.setPosition(0, 0);
 
     //Creo el primer personaje
     sf::Texture texture;
     sf::Sprite image;
     if (!texture.loadFromFile("../assets/PJ.png")) {
-        std::cout << "Error al cargar textura, verifique la ruta";
         return EXIT_FAILURE;
     }
     image.setTexture(texture);
-
-    Personaje1 player1(200, 680, texture);
+    Personaje player1(200, 680, texture);
 
     //Creo el segundo personaje
     sf::Texture texture2;
     sf::Sprite image2;
     if (!texture2.loadFromFile("../assets/PJ2.png")) {
-        std::cout << "Error al cargar textura, verifique la ruta";
         return EXIT_FAILURE;
     }
     image2.setTexture(texture2);
-
-    Personaje1 player2(1000, 680, texture2);
+    Personaje player2(1000, 680, texture2);
 
     // Main loop
     while (window.isOpen()) {

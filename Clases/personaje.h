@@ -3,13 +3,13 @@
 
 #include <SFML/Graphics.hpp>
 
-class Personaje1 {
+class Personaje {
     int x, y;
     int velx, vely;
     sf::Sprite sp;
     sf::Texture tx;
 public:
-    Personaje1(int x, int y, const sf::Texture &tx);
+    Personaje(int x, int y, const sf::Texture &tx);
     void dibujar(sf::RenderWindow &w);
     void moverDerecha();
     void moverIzquierda();
