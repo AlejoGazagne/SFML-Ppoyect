@@ -19,3 +19,7 @@ void Personaje::moverIzquierda(){
     sp.move(-5, 0);
 }
 
+sf::Vector2f Personaje::getPos() const {
+    return sp.getPosition();
+}
+

@@ -1,23 +1,22 @@
-//
-// Created by lauty on 5/10/2021.
-//
-
 #include "Ataque.h"
-#include <math.h>
+#include <cmath>
 
-Ataque::Ataque(int x , int y , float angulo , const sf::Texture &tx) : angulo(angulo) {
-
-sp.setTexture(tx);
-sp.setPosition(x,y);
-sp.rotate(angulo);
+Ataque::Ataque(sf::Vector2f pos, const sf::Texture &tx){
+    sp.setPosition(pos);
+    sp.setTexture(tx);
+    timeout = 200;
 }
 void Ataque :: dibujar(sf::RenderWindow &w) {
     w.draw(sp);
 }
 void Ataque::simular() {
-    angulo=0;
     sf::Vector2f newPos;
-    newPos.x = sp.getPosition().x * VEL_ATAQUE * cos(sp.getRotation()/360 * M_PI * 2);
-    newPos.y = sp.getPosition().y * VEL_ATAQUE * sin(sp.getRotation()/ 360 * M_PI * 2);
+    newPos.x = sp.getPosition().x + VEL_ATAQUE * cos(sp.getRotation()/360 * M_PI * 2);
+    newPos.y = sp.getPosition().y + VEL_ATAQUE * sin(sp.getRotation()/ 360 * M_PI * 2);
     sp.setPosition(newPos);
+    timeout--;
+}
+
+int Ataque::getTimeout() const {
+    return timeout;
 }

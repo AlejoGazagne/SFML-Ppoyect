@@ -3,6 +3,8 @@
 #include "Clases/personaje.h"
 #include "Clases/Ataque.h"
 
+int look_empty(Ataque *ataque[]);
+
 int main() {
     //Crear ventana y mostrar el mapa
     sf::RenderWindow window(sf::VideoMode(1536, 990), "Proyecto Info II");
@@ -25,8 +27,13 @@ int main() {
     Personaje player1(200, 680, texture);
 
     //CREO TEXTURA DEL ATAQUE
-    sf::Texture tx_ataque;   //CAMBIOOOOO
-    if(!tx_ataque.loadFromFile("ataque.png"))
+    Ataque **ataque = new Ataque *[100];
+    for(int ii = 0; ii < 100; ii++){
+        ataque[ii] = nullptr;
+    }
+    sf::Texture tx_ataque;
+    if(!tx_ataque.loadFromFile("../assets/Bala.png"))
+        return EXIT_FAILURE;
 
 
     // Main loop
@@ -47,23 +54,39 @@ int main() {
             player1.moverIzquierda();
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-            Ataque = new ataque(100,100,0,tx_ataque);
+            int idx = look_empty(ataque);
+            if(idx >= 0)
+                ataque[idx] = new Ataque(player1.getPos(),tx_ataque);
         }
         //CREO PUNTERO ATAQUE
-        Ataque *ataque = nullptr;
-
-        if(ataque!= nullptr)
-        ataque->simular();
+        for(int ii = 0; ii < 100; ii++){
+            if(ataque[ii]!= nullptr){
+                ataque[ii]->simular();
+                if(ataque[ii]->getTimeout() < 0){
+                delete ataque[ii];
+                ataque[ii] = nullptr;
+                }
+            }
+        }
 
         // Draw all elements
         window.clear();
         window.draw(image1);
         player1.dibujar(window);
-        if(ataque!= nullptr){
-            ataque->dibujar(window);
+        for(int ii = 0; ii < 100; ii++){
+            if(ataque[ii]!= nullptr){
+                ataque[ii]->dibujar(window);
+            }
         }
         window.display();
 
     }
     return EXIT_SUCCESS;
+}
+int look_empty(Ataque *ataque[]){
+    for(int ii = 0; ii < 100; ii++){
+        if(ataque[ii] == nullptr)
+            return ii;
+    }
+    return -1;
 }

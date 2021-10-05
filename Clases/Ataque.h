@@ -1,22 +1,19 @@
-#include <SFML/Graphics.hpp>
-
 #ifndef PERSONAJE1_H_ATAQUE_H
 #define PERSONAJE1_H_ATAQUE_H
+#include <SFML/Graphics.hpp>
 
-#define VEL_ATAQUE 2.0
+#define VEL_ATAQUE 6.5
 
 class Ataque {
 private:
     sf::Sprite sp;
-float angulo;
-float velocidad;
+    int timeout;
 public:
-
     void dibujar(sf::RenderWindow &w);
-
-    Ataque(int x , int y , float angulo , const sf::Texture &tx);
-
+    Ataque(sf::Vector2f pos, const sf::Texture &tx);
     void simular();
+
+    int getTimeout() const;
 };
 
 

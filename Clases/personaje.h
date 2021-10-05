@@ -7,8 +7,6 @@
 class Personaje {
     int x, y;
     int velx, vely;
-    int ancho = 0;
-    int alto = 0;
     sf::Sprite sp;
     sf::Texture tx;
 public:
@@ -16,6 +14,8 @@ public:
     void dibujar(sf::RenderWindow &w);
     void moverDerecha();
     void moverIzquierda();
+
+    sf::Vector2f getPos() const;
 
 };
 
