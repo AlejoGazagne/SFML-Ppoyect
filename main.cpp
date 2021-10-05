@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Clases/personaje.h"
-
+#include "Clases/Ataque.h"
 
 int main() {
     //Crear ventana y mostrar el mapa
@@ -24,14 +24,10 @@ int main() {
     image.setTexture(texture);
     Personaje player1(200, 680, texture);
 
-    //Creo el segundo personaje
-    sf::Texture texture2;
-    sf::Sprite image2;
-    if (!texture2.loadFromFile("../assets/PJ2.png")) {
-        return EXIT_FAILURE;
-    }
-    image2.setTexture(texture2);
-    Personaje player2(1000, 680, texture2);
+    //CREO TEXTURA DEL ATAQUE
+    sf::Texture tx_ataque;   //CAMBIOOOOO
+    if(!tx_ataque.loadFromFile("ataque.png"))
+
 
     // Main loop
     while (window.isOpen()) {
@@ -50,19 +46,22 @@ int main() {
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
             player1.moverIzquierda();
         }
-        //Mover player 2
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::L)){
-            player2.moverDerecha();
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+            Ataque = new ataque(100,100,0,tx_ataque);
         }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::J)){
-            player2.moverIzquierda();
-        }
+        //CREO PUNTERO ATAQUE
+        Ataque *ataque = nullptr;
+
+        if(ataque!= nullptr)
+        ataque->simular();
 
         // Draw all elements
         window.clear();
         window.draw(image1);
         player1.dibujar(window);
-        player2.dibujar(window);
+        if(ataque!= nullptr){
+            ataque->dibujar(window);
+        }
         window.display();
 
     }
