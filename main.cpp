@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-
 #include "Clases/personaje.h"
+
 
 int main() {
     //Crear ventana y mostrar el mapa
@@ -18,7 +18,7 @@ int main() {
     //Creo el primer personaje
     sf::Texture texture;
     sf::Sprite image;
-    if (!texture.loadFromFile("../assets/PJ.png")) {
+    if (!texture.loadFromFile("../assets/Idle.png")) {
         return EXIT_FAILURE;
     }
     image.setTexture(texture);

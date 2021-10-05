@@ -3,9 +3,12 @@
 
 #include <SFML/Graphics.hpp>
 
+
 class Personaje {
     int x, y;
     int velx, vely;
+    int ancho = 0;
+    int alto = 0;
     sf::Sprite sp;
     sf::Texture tx;
 public:
