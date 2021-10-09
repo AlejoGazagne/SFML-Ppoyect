@@ -6,6 +6,7 @@
 int look_empty(Ataque *ataque[]);
 
 int main() {
+    int time = 70;
     //Crear ventana y mostrar el mapa
     sf::RenderWindow window(sf::VideoMode(1536, 990), "Proyecto Info II");
     window.setFramerateLimit(60);
@@ -32,9 +33,8 @@ int main() {
         ataque[ii] = nullptr;
     }
     sf::Texture tx_ataque;
-    if(!tx_ataque.loadFromFile("../assets/Bala.png"))
+    if(!tx_ataque.loadFromFile("../assets/espada.png"))
         return EXIT_FAILURE;
-
 
     // Main loop
     while (window.isOpen()) {
@@ -54,17 +54,22 @@ int main() {
             player1.moverIzquierda();
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-            int idx = look_empty(ataque);
-            if(idx >= 0)
-                ataque[idx] = new Ataque(player1.getPos(),tx_ataque);
+            if(time >= 70){
+                int idx = look_empty(ataque);
+                if(idx >= 0){
+                    ataque[idx] = new Ataque(player1.getPos(),tx_ataque);
+                    time = 0;
+                }
+            }
         }
+        time++;
         //CREO PUNTERO ATAQUE
         for(int ii = 0; ii < 100; ii++){
             if(ataque[ii]!= nullptr){
                 ataque[ii]->simular();
                 if(ataque[ii]->getTimeout() < 0){
-                delete ataque[ii];
-                ataque[ii] = nullptr;
+                    delete ataque[ii];
+                    ataque[ii] = nullptr;
                 }
             }
         }
@@ -88,5 +93,5 @@ int look_empty(Ataque *ataque[]){
         if(ataque[ii] == nullptr)
             return ii;
     }
-    return -1;
+       return -1;
 }

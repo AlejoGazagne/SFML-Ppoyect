@@ -23,3 +23,25 @@ sf::Vector2f Personaje::getPos() const {
     return sp.getPosition();
 }
 
+void Personaje::updateAttack() {
+    if(this->attackCooldown < this->attackcooldownMax)
+        this->attackCooldown += 1.f;
+}
+
+void Personaje::update() {
+    this->updateAttack();
+}
+
+const bool Personaje::canAttack() {
+    if(this->attackCooldown >= this->attackcooldownMax){
+        this->attackCooldown = 0.f;
+        return true;
+    }
+    return false;
+}
+
+void Personaje::initVariables() {
+    this->attackcooldownMax = 10.f;
+    this->attackCooldown = this->attackcooldownMax;
+}
+

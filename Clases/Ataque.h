@@ -12,7 +12,6 @@ public:
     void dibujar(sf::RenderWindow &w);
     Ataque(sf::Vector2f pos, const sf::Texture &tx);
     void simular();
-
     int getTimeout() const;
 };
 
