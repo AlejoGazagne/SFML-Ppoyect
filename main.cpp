@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Clases/personaje.h"
 #include "Clases/Ataque.h"
+#include "Clases/MapaTMX.h"
 
 int look_empty(Ataque *ataque[]);
 
@@ -10,22 +11,20 @@ int main() {
     //Crear ventana y mostrar el mapa
     sf::RenderWindow window(sf::VideoMode(1536, 990), "Proyecto Info II");
     window.setFramerateLimit(60);
-    sf::Texture texture1;
-    sf::Sprite image1;
+    sf::View camera;
 
-    if (!texture1.loadFromFile("../assets/mapa1Final.png")) {
-        return EXIT_FAILURE;
-    }
-    image1.setTexture(texture1);
+    camera.reset({0, 0, 800, 600});
+    window.setView(camera);
+    camera.zoom(0.5);
 
-    //Creo el primer personaje
-    sf::Texture texture;
+    //Creo el personaje
+    sf::Texture tx_player;
     sf::Sprite image;
-    if (!texture.loadFromFile("../assets/Idle.png")) {
+    if (!tx_player.loadFromFile("../assets/Idle.png")) {
         return EXIT_FAILURE;
     }
-    image.setTexture(texture);
-    Personaje player1(200, 680, texture);
+    image.setTexture(tx_player);
+    Personaje *player;
 
     //CREO TEXTURA DEL ATAQUE
     Ataque **ataque = new Ataque *[100];
@@ -35,6 +34,10 @@ int main() {
     sf::Texture tx_ataque;
     if(!tx_ataque.loadFromFile("../assets/espada.png"))
         return EXIT_FAILURE;
+
+    //Mapa miMapa("mapa.txt");
+    MapaTMX miMapa("assets/Mapa/mapaFinal.tmx", tx_player);
+    player = miMapa.getPlayer();
 
     // Main loop
     while (window.isOpen()) {
@@ -46,23 +49,27 @@ int main() {
         }
         // Update world parameters
 
-        // player1.move(3,4);
+        // Mover player
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
-            player1.moverDerecha();
+            player->moverDerecha();
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
-            player1.moverIzquierda();
+            player->moverIzquierda();
         }
+        /*if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
+            player->saltar();
+        }*/
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
             if(time >= 70){
                 int idx = look_empty(ataque);
                 if(idx >= 0){
-                    ataque[idx] = new Ataque(player1.getPos(),tx_ataque);
+                    ataque[idx] = new Ataque(player->getPos(),tx_ataque);
                     time = 0;
                 }
             }
         }
         time++;
+
         //CREO PUNTERO ATAQUE
         for(int ii = 0; ii < 100; ii++){
             if(ataque[ii]!= nullptr){
@@ -76,8 +83,10 @@ int main() {
 
         // Draw all elements
         window.clear();
-        window.draw(image1);
-        player1.dibujar(window);
+        camera.setCenter(player->getPos());
+        window.setView(camera);
+        miMapa.dibujar(window);
+        player->dibujar(window);
         for(int ii = 0; ii < 100; ii++){
             if(ataque[ii]!= nullptr){
                 ataque[ii]->dibujar(window);
@@ -93,5 +102,5 @@ int look_empty(Ataque *ataque[]){
         if(ataque[ii] == nullptr)
             return ii;
     }
-       return -1;
+    return -1;
 }
