@@ -1,7 +1,14 @@
 cmake_minimum_required(VERSION 3.15)
 project(proyecto-infoII)
+include_directories("C:\\mingw64\\include")
 
 set(CMAKE_CXX_STANDARD 14)
+
+if(WIN32)
+    set(SFML_STATIC_LIBRARIES TRUE)
+    set(TMXLITE_STATIC_LIB TRUE)
+    SET(CMAKE_EXE_LINKER_FLAGS "-static")
+endif()
 
 # Install TMXLITE if not installed
 find_package(TMXLITE QUIET)

@@ -1,8 +1,9 @@
 #include "Ataque.h"
 #include <cmath>
 
-Ataque::Ataque(sf::Vector2f pos, const sf::Texture &tx){
+Ataque::Ataque(sf::Vector2f pos, float ang, const sf::Texture &tx){
     sp.setPosition(pos);
+    sp.rotate(ang);
     sp.setTexture(tx);
     timeout = 200;
 }

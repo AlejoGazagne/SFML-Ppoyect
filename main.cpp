@@ -13,17 +13,17 @@ int main() {
     window.setFramerateLimit(60);
     sf::View camera;
 
-    camera.reset({0, 0, 800, 600});
+    camera.reset({0, 0, 850, 600});
     window.setView(camera);
-    camera.zoom(0.5);
+    camera.zoom(1.75);
 
     //Creo el personaje
     sf::Texture tx_player;
-    sf::Sprite image;
-    if (!tx_player.loadFromFile("../assets/Idle.png")) {
+    sf::Sprite image_player;
+    if (!tx_player.loadFromFile("assets/personaje.png")) {
         return EXIT_FAILURE;
     }
-    image.setTexture(tx_player);
+    image_player.setTexture(tx_player);
     Personaje *player;
 
     //CREO TEXTURA DEL ATAQUE
@@ -32,12 +32,15 @@ int main() {
         ataque[ii] = nullptr;
     }
     sf::Texture tx_ataque;
-    if(!tx_ataque.loadFromFile("../assets/espada.png"))
+    if(!tx_ataque.loadFromFile("assets/espada.png"))
         return EXIT_FAILURE;
 
     //Mapa miMapa("mapa.txt");
-    MapaTMX miMapa("assets/Mapa/mapaFinal.tmx", tx_player);
+    MapaTMX miMapa("assets/Mapa/Mapa.tmx", tx_player);
     player = miMapa.getPlayer();
+
+    sf::Texture tx_Mapa;
+    sf::Sprite image_Mapa;
 
     // Main loop
     while (window.isOpen()) {
@@ -56,14 +59,12 @@ int main() {
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
             player->moverIzquierda();
         }
-        /*if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
-            player->saltar();
-        }*/
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-            if(time >= 70){
+            if(time >= 40){
                 int idx = look_empty(ataque);
                 if(idx >= 0){
-                    ataque[idx] = new Ataque(player->getPos(),tx_ataque);
+                    ataque[idx] = new Ataque(player->getPos(), player->getAng(), tx_ataque);
+                    cout<<player->getAng()<<endl;
                     time = 0;
                 }
             }
@@ -86,6 +87,7 @@ int main() {
         camera.setCenter(player->getPos());
         window.setView(camera);
         miMapa.dibujar(window);
+        //window.draw(image_Mapa);
         player->dibujar(window);
         for(int ii = 0; ii < 100; ii++){
             if(ataque[ii]!= nullptr){
