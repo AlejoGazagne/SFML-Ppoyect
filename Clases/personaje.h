@@ -20,11 +20,12 @@ public:
     void moverIzquierda();
     sf::Vector2f getPos() const;
     float getAng();
+    //void colisiones(sf::Rect<float> objects);
 
-    void updateAttack();
+    /*void updateAttack();
     void update();
     const bool canAttack();
-    void initVariables();
+    void initVariables();*/
 };
 
 #endif //PROYECTO_INFOII_PERSONAJE1_H

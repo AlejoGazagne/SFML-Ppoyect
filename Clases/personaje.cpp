@@ -16,11 +16,21 @@ void Personaje::dibujar(sf::RenderWindow &w) {
     w.draw(sp);
     sf::RectangleShape cuadrado({sp.getGlobalBounds().width, sp.getGlobalBounds().height});
     cuadrado.setPosition({sp.getGlobalBounds().left, sp.getGlobalBounds().top});
-    cuadrado.setOutlineColor(sf::Color::Green);
+    cuadrado.setOutlineColor(sf::Color::Transparent);
     cuadrado.setOutlineThickness(2);
     cuadrado.setFillColor(sf::Color::Transparent);
     w.draw(cuadrado);
 }
+
+/*void Personaje::colisiones(sf::Rect<float> objects){
+    sf::Vector2f newPos, oldPos = sp.getPosition();
+    sf::FloatRect pared({});
+
+    if (sp.getGlobalBounds().intersects()){
+        sp.setPosition(oldPos);
+        std::cout << "Choqué" << std::endl;
+    }
+}*/
 
 void Personaje::moverDerecha(){
     sp.move(5, 0);
@@ -42,7 +52,7 @@ float Personaje::getAng(){
     return ang;
 }
 
-void Personaje::updateAttack() {
+/*void Personaje::updateAttack() {
     if(this->attackCooldown < this->attackcooldownMax)
         this->attackCooldown += 1.f;
 }
@@ -62,5 +72,5 @@ const bool Personaje::canAttack() {
 void Personaje::initVariables() {
     this->attackcooldownMax = 10.f;
     this->attackCooldown = this->attackcooldownMax;
-}
+}*/
 

@@ -8,14 +8,15 @@ int look_empty(Ataque *ataque[]);
 
 int main() {
     int time = 70;
+    sf::Vector2i cPos;
     //Crear ventana y mostrar el mapa
-    sf::RenderWindow window(sf::VideoMode(1536, 990), "Proyecto Info II");
+    sf::RenderWindow window(sf::VideoMode(1536, 850), "Proyecto Info II");
     window.setFramerateLimit(60);
     sf::View camera;
 
-    camera.reset({0, 0, 850, 600});
+    camera.reset({0, 0, 850, 480});
     window.setView(camera);
-    camera.zoom(1.75);
+    camera.zoom(2);
 
     //Creo el personaje
     sf::Texture tx_player;
@@ -64,7 +65,6 @@ int main() {
                 int idx = look_empty(ataque);
                 if(idx >= 0){
                     ataque[idx] = new Ataque(player->getPos(), player->getAng(), tx_ataque);
-                    cout<<player->getAng()<<endl;
                     time = 0;
                 }
             }
@@ -82,12 +82,21 @@ int main() {
             }
         }
 
+        //Movimiento de camara
+        if(player->getPos().x > 1500 ){
+            cPos.x = 2030;
+        }
+        if(player->getPos().x < 1500){
+            cPos.x = 850;
+        }
+        if(player->getPos().y > 480){
+            cPos.y = 480;
+        }
         // Draw all elements
         window.clear();
-        camera.setCenter(player->getPos());
+        camera.setCenter(cPos.x, cPos.y);
         window.setView(camera);
         miMapa.dibujar(window);
-        //window.draw(image_Mapa);
         player->dibujar(window);
         for(int ii = 0; ii < 100; ii++){
             if(ataque[ii]!= nullptr){

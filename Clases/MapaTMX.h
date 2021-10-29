@@ -69,9 +69,19 @@ public:
                 const auto &objectLayer = layers[i]->getLayerAs<tmx::ObjectGroup>();
                 const auto &objects = objectLayer.getObjects();
                 for (int j = 0; j < objects.size(); ++j) {
-                    //cout << objects[j].getName() << " ";
-                    //cout << objects[j].getPosition().x << " " << objects[j].getPosition().y << endl;
-                    
+                    cout << objects[j].getName() << " ";
+                    cout << objects[j].getPosition().x << " " << objects[j].getPosition().y <<endl;
+                    if(objects[j].getName() == "Pared"){
+                        sf::Rect<int> paredes(objects[j].getPosition().x, objects[j].getPosition().y,1,1);
+
+                        cout<<"objeto"<<"\t";
+                        cout<<paredes.left<<"\t";
+                        cout<<paredes.top<<"\t";
+                        cout<<paredes.width<<"\t";
+                        cout<<paredes.height<<endl;
+
+                    }
+
                     if (objects[j].getName() == "player") {
                         player = new Personaje(objects[j].getPosition().x, objects[j].getPosition().y, objects[j].getRotation(),pl_tx);
                     }
