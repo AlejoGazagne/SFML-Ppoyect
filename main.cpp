@@ -3,6 +3,8 @@
 #include "Clases/personaje.h"
 #include "Clases/Ataque.h"
 #include "Clases/MapaTMX.h"
+#include "Clases/Animacion.h"
+
 
 int look_empty(Ataque *ataque[]);
 
@@ -26,6 +28,10 @@ int main() {
     image.setTexture(tx_player);
     Personaje *player;
 
+    Animacion animacion(&tx_player , sf::Vector2u(2,4), 0.3f);
+    float deltaTime = 0.0f;
+    sf::Clock clock;
+
     //CREO TEXTURA DEL ATAQUE
     Ataque **ataque = new Ataque *[100];
     for(int ii = 0; ii < 100; ii++){
@@ -47,6 +53,11 @@ int main() {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+        deltaTime = clock.restart().asSeconds();
+
+
+
+
         // Update world parameters
 
         // Mover player
@@ -82,6 +93,9 @@ int main() {
         }
 
         // Draw all elements
+        animacion.Update(0, deltaTime);
+        player -> setTexture(animacion.uvRect);
+
         window.clear();
         camera.setCenter(player->getPos());
         window.setView(camera);

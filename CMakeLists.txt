@@ -22,5 +22,5 @@ endif ()
 include_directories(${TMXLITE_INCLUDE_DIR})
 #
 
-add_executable(proyecto main.cpp Clases/personaje.cpp Clases/Ataque.cpp)
+add_executable(proyecto main.cpp Clases/personaje.cpp Clases/Ataque.cpp Clases/Animacion.cpp)
 target_link_libraries(proyecto sfml-graphics sfml-audio sfml-system sfml-window ${TMXLITE_LIBRARIES})
