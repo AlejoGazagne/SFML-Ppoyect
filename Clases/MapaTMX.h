@@ -16,6 +16,7 @@ private:
     tmx::Map map;
     sf::Texture textura;
     LinkedList<sf::Sprite *> sprites;
+    LinkedList<sf::Rect<float> *> list;
     sf::Vector2u tile_size;
     uint32_t columns;
     Personaje *player;
@@ -71,14 +72,11 @@ public:
                 for (int j = 0; j < objects.size(); ++j) {
                     cout << objects[j].getName() << " ";
                     cout << objects[j].getPosition().x << " " << objects[j].getPosition().y <<endl;
-                    if(objects[j].getName() == "Pared"){
-                        sf::Rect<int> paredes(objects[j].getPosition().x, objects[j].getPosition().y,1,1);
 
-                        cout<<"objeto"<<"\t";
-                        cout<<paredes.left<<"\t";
-                        cout<<paredes.top<<"\t";
-                        cout<<paredes.width<<"\t";
-                        cout<<paredes.height<<endl;
+                    if(objects[j].getName() == "Pared"){
+                        //sf::Rect<int> paredes(objects[j].getAABB().left, objects[j].getAABB().top, objects[j].getAABB().width, objects[j].getAABB().height);
+                        list.push_front(new sf::Rect<float> (objects[j].getAABB().left, objects[j].getAABB().top, objects[j].getAABB().width, objects[j].getAABB().height));
+
 
                     }
 
@@ -87,6 +85,7 @@ public:
                     }
                 }
             }
+            //player->colisiones(paredes);
         }
     }
 

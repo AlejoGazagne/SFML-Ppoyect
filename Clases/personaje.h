@@ -2,6 +2,7 @@
 #define PROYECTO_INFOII_PERSONAJE1_H
 
 #include <SFML/Graphics.hpp>
+#include "LinkedList.h"
 
 
 class Personaje {
@@ -11,8 +12,6 @@ class Personaje {
     sf::Sprite sp;
     sf::Texture tx;
 
-    float attackCooldown;
-    float attackcooldownMax;
 public:
     Personaje(int x, int y,float ang, const sf::Texture &tx);
     void dibujar(sf::RenderWindow &w);
@@ -20,12 +19,8 @@ public:
     void moverIzquierda();
     sf::Vector2f getPos() const;
     float getAng();
-    //void colisiones(sf::Rect<float> objects);
+    //void colisiones(LinkedList<sf::Rect<float> *> list);
 
-    /*void updateAttack();
-    void update();
-    const bool canAttack();
-    void initVariables();*/
 };
 
 #endif //PROYECTO_INFOII_PERSONAJE1_H

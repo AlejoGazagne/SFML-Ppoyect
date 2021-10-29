@@ -118,5 +118,4 @@ void LinkedList<T>::remove(unsigned int pos) {
     size--;
 }
 
-
 #endif //INFOII_LINKEDLIST_H

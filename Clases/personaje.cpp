@@ -22,14 +22,11 @@ void Personaje::dibujar(sf::RenderWindow &w) {
     w.draw(cuadrado);
 }
 
-/*void Personaje::colisiones(sf::Rect<float> objects){
+/*void Personaje::colisiones(LinkedList<sf::Rect<float> *> list){
     sf::Vector2f newPos, oldPos = sp.getPosition();
-    sf::FloatRect pared({});
 
-    if (sp.getGlobalBounds().intersects()){
-        sp.setPosition(oldPos);
-        std::cout << "Choqué" << std::endl;
-    }
+
+
 }*/
 
 void Personaje::moverDerecha(){
@@ -51,26 +48,3 @@ sf::Vector2f Personaje::getPos() const {
 float Personaje::getAng(){
     return ang;
 }
-
-/*void Personaje::updateAttack() {
-    if(this->attackCooldown < this->attackcooldownMax)
-        this->attackCooldown += 1.f;
-}
-
-void Personaje::update() {
-    this->updateAttack();
-}
-
-const bool Personaje::canAttack() {
-    if(this->attackCooldown >= this->attackcooldownMax){
-        this->attackCooldown = 0.f;
-        return true;
-    }
-    return false;
-}
-
-void Personaje::initVariables() {
-    this->attackcooldownMax = 10.f;
-    this->attackCooldown = this->attackcooldownMax;
-}*/
-

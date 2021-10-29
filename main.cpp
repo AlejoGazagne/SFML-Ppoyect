@@ -83,10 +83,10 @@ int main() {
         }
 
         //Movimiento de camara
-        if(player->getPos().x > 1500 ){
+        if(player->getPos().x > 1200 ){
             cPos.x = 2030;
         }
-        if(player->getPos().x < 1500){
+        if(player->getPos().x < 1200){
             cPos.x = 850;
         }
         if(player->getPos().y > 480){
