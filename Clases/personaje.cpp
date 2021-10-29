@@ -3,7 +3,8 @@
 #include <iostream>
 
 Personaje::Personaje(int x, int y, float ang, const sf::Texture &tx) : x(x), y(y), tx(tx) {
-    //ang = 0;
+    oldPos.x = x;
+    oldPos.y = y;
     velx = 0;
     vely = 0;
     sp.setTexture(tx);
@@ -22,23 +23,41 @@ void Personaje::dibujar(sf::RenderWindow &w) {
     w.draw(cuadrado);
 }
 
-/*void Personaje::colisiones(LinkedList<sf::Rect<float> *> list){
-    sf::Vector2f newPos, oldPos = sp.getPosition();
+void Personaje::colisiones(LinkedList<sf::Rect<float> *> list){
+    sf::Rect<float> *miRectangulo;
 
+    for(int ii = 0; ii < list.getSize(); ii++){
+        miRectangulo = list.get(ii);
+        if(sp.getGlobalBounds().intersects(*miRectangulo)){
+            sp.setPosition(oldPos);
+        }
+    }
 
-
-}*/
+}
 
 void Personaje::moverDerecha(){
+    oldPos = sp.getPosition();
     sp.move(5, 0);
     ang = 0;
     sp.setScale(1,1);
+
 }
 
 void Personaje::moverIzquierda(){
+    oldPos = sp.getPosition();
     sp.move(-5, 0);
     ang = 180;
     sp.setScale(-1,1);
+}
+
+void Personaje::saltar(){
+    oldPos = sp.getPosition();
+    sp.move(0, -10);
+
+}
+void Personaje::gravity() {
+    oldPos = sp.getPosition();
+    sp.move(0,10);
 }
 
 sf::Vector2f Personaje::getPos() const {

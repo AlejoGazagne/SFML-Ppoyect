@@ -70,8 +70,8 @@ public:
                 const auto &objectLayer = layers[i]->getLayerAs<tmx::ObjectGroup>();
                 const auto &objects = objectLayer.getObjects();
                 for (int j = 0; j < objects.size(); ++j) {
-                    cout << objects[j].getName() << " ";
-                    cout << objects[j].getPosition().x << " " << objects[j].getPosition().y <<endl;
+                    //cout << objects[j].getName() << " ";
+                    //cout << objects[j].getPosition().x << " " << objects[j].getPosition().y <<endl;
 
                     if(objects[j].getName() == "Pared"){
                         //sf::Rect<int> paredes(objects[j].getAABB().left, objects[j].getAABB().top, objects[j].getAABB().width, objects[j].getAABB().height);
@@ -85,7 +85,6 @@ public:
                     }
                 }
             }
-            //player->colisiones(paredes);
         }
     }
 
@@ -93,6 +92,10 @@ public:
         for (int i = sprites.getSize() - 1; i >= 0; --i) {
             w.draw(*sprites.get(i));
         }
+    }
+
+    const LinkedList<sf::Rect<float> *> &getList() const {
+        return list;
     }
 
     Personaje *getPlayer() {

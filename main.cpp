@@ -7,8 +7,11 @@
 int look_empty(Ataque *ataque[]);
 
 int main() {
-    int time = 70;
+    int time = 70, i;
     sf::Vector2i cPos;
+    //
+    const float gravity = 1;
+    bool isJumping = false;
     //Crear ventana y mostrar el mapa
     sf::RenderWindow window(sf::VideoMode(1536, 850), "Proyecto Info II");
     window.setFramerateLimit(60);
@@ -60,6 +63,11 @@ int main() {
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
             player->moverIzquierda();
         }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
+            isJumping = true;
+            player->saltar();
+        }
+
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
             if(time >= 40){
                 int idx = look_empty(ataque);
@@ -70,6 +78,14 @@ int main() {
             }
         }
         time++;
+
+        //Gravity logic
+        if(player->getPos().y < 850 && isJumping == false){
+            player->gravity();
+        }
+        isJumping = false;
+
+        player->colisiones(miMapa.getList());
 
         //CREO PUNTERO ATAQUE
         for(int ii = 0; ii < 100; ii++){

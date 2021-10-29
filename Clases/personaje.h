@@ -4,11 +4,11 @@
 #include <SFML/Graphics.hpp>
 #include "LinkedList.h"
 
-
 class Personaje {
     int x, y;
     int velx, vely;
     float ang;
+    sf::Vector2f oldPos;
     sf::Sprite sp;
     sf::Texture tx;
 
@@ -17,9 +17,11 @@ public:
     void dibujar(sf::RenderWindow &w);
     void moverDerecha();
     void moverIzquierda();
+    void saltar();
+    void gravity();
     sf::Vector2f getPos() const;
     float getAng();
-    //void colisiones(LinkedList<sf::Rect<float> *> list);
+    void colisiones(LinkedList<sf::Rect<float> *> list);
 
 };
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="60" height="20" tilewidth="48" tileheight="48" infinite="0" nextlayerid="3" nextobjectid="53">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="60" height="20" tilewidth="48" tileheight="48" infinite="0" nextlayerid="3" nextobjectid="56">
  <tileset firstgid="1" name="Mapa1" tilewidth="48" tileheight="48" tilecount="1200" columns="60">
   <image source="Mapa1.png" width="2880" height="960"/>
  </tileset>
@@ -49,7 +49,7 @@
   <object id="20" name="Pared" x="0" y="528" width="48" height="432"/>
   <object id="21" name="Pared" x="48" y="816" width="288" height="144"/>
   <object id="22" name="Pared" x="96" y="768" width="144" height="48"/>
-  <object id="23" name="Pared" x="432" y="912" width="336" height="48"/>
+  <object id="23" name="Pared" x="432" y="951" width="336" height="9"/>
   <object id="24" name="Pared" x="1056" y="768" width="720" height="192"/>
   <object id="25" name="Pared" x="960" y="864" width="96" height="96"/>
   <object id="26" name="Pared" x="1248" y="720" width="528" height="48"/>
@@ -60,7 +60,7 @@
   <object id="31" name="Pared" x="1776" y="240" width="864" height="96"/>
   <object id="32" name="Pared" x="2832" y="48" width="48" height="768"/>
   <object id="33" name="Pared" x="1776" y="816" width="1104" height="144"/>
-  <object id="34" x="2352" y="720" width="144" height="96"/>
+  <object id="34" name="Pared" x="2352" y="720" width="144" height="96"/>
   <object id="35" name="Pared" x="1776" y="480" width="96" height="15.5"/>
   <object id="36" name="Pared" x="1776" y="672" width="48" height="15.5"/>
   <object id="37" name="Pared" x="2064" y="480" width="144.667" height="16"/>
@@ -70,20 +70,10 @@
   <object id="41" name="Pared" x="2736" y="528" width="96.6667" height="15.3333"/>
   <object id="42" name="Pared" x="2640" y="624" width="96.6667" height="15.3333"/>
   <object id="43" name="Pared" x="2736" y="720" width="95.3333" height="15.3333"/>
-  <object id="44" name="Rampa" x="336" y="816">
-   <polygon points="0,0 96,96 96,144 0,144"/>
-  </object>
-  <object id="45" name="Rampa" x="1056" y="768">
-   <polygon points="0,0 0,96 -96,96"/>
-  </object>
-  <object id="46" name="Rampa" x="2496" y="720">
-   <polygon points="0,0 96,96 0,96"/>
-  </object>
-  <object id="47" name="player" x="174.34" y="746.337">
+  <object id="47" name="player" x="369.09" y="660.337">
    <point/>
   </object>
-  <object id="48" name="Rampa" x="960" y="864">
-   <polygon points="0,0 -48,0 -192,48 -192,96 0,96"/>
-  </object>
+  <object id="53" name="Pared" x="768" y="948.833" width="192" height="10.6667"/>
+  <object id="54" name="Pared" x="336" y="950.667" width="96" height="9.33333"/>
  </objectgroup>
 </map>
