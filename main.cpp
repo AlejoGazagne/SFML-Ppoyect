@@ -6,6 +6,7 @@
 #include "Clases/maniMenu.h"
 
 int look_empty(Ataque *ataque[]);
+
 int menu();
 
 int main() {
@@ -44,11 +45,11 @@ int main() {
 
     //CREO TEXTURA DEL ATAQUE
     Ataque **ataque = new Ataque *[100];
-    for(int ii = 0; ii < 100; ii++){
+    for (int ii = 0; ii < 100; ii++) {
         ataque[ii] = nullptr;
     }
     sf::Texture tx_ataque;
-    if(!tx_ataque.loadFromFile("assets/espada.png"))
+    if (!tx_ataque.loadFromFile("assets/espada.png"))
         return EXIT_FAILURE;
 
     //Mapa miMapa("mapa.txt");
@@ -70,29 +71,20 @@ int main() {
         // Update world parameters
 
         // Mover player
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
             player->moverDerecha(deltaTime);
         }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
             player->moverIzquierda(deltaTime);
         }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && whileJump == false){
-            player->setSpeedvalue(jumpF/mass);
-            whileJump = true;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !player->getJumping()) {
+            player->setSpeedvalue(jumpF / mass);
         }
-        if(whileJump){
-            player->saltar(deltaTime);
-            if(player->getPos().y > 770){
-                whileJump = false;
-                player->setSpeedvalue(0);
-            }
-
-        }
-        cout<<player->getPos().x<<"\t"<<player->getPos().y<<endl;
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-            if(time >= 40){
+        cout << player->getPos().x << "\t" << player->getPos().y << endl;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+            if (time >= 40) {
                 int idx = look_empty(ataque);
-                if(idx >= 0){
+                if (idx >= 0) {
                     ataque[idx] = new Ataque(player->getPos(), player->getAng(), tx_ataque);
                     time = 0;
                 }
@@ -122,13 +114,13 @@ int main() {
             break;
         }*/
 //////////////////////////////////////////////////////////////////////////
-        player->colisiones(miMapa.getList());
+        player->colisiones(miMapa.getList(), deltaTime);
 
         //CREO PUNTERO ATAQUE
-        for(int ii = 0; ii < 100; ii++){
-            if(ataque[ii]!= nullptr){
+        for (int ii = 0; ii < 100; ii++) {
+            if (ataque[ii] != nullptr) {
                 ataque[ii]->simular();
-                if(ataque[ii]->getTimeout() < 0){
+                if (ataque[ii]->getTimeout() < 0) {
                     delete ataque[ii];
                     ataque[ii] = nullptr;
                 }
@@ -136,14 +128,14 @@ int main() {
         }
 
         //Movimiento de camara
-        if(player->getPos().x > 1200 ){
+        if (player->getPos().x > 1200) {
             cPos.x = 2030;
         }
-        if(player->getPos().x < 1200){
+        if (player->getPos().x < 1200) {
             cPos.x = 850;
         }
         //if(player->getPos().y > 480){
-            cPos.y = 480;
+        cPos.y = 480;
         //}
         // Draw all elements
         window.clear();
@@ -152,37 +144,50 @@ int main() {
         window.setView(camera);
         miMapa.dibujar(window);
         player->dibujar(window);
-        for(int ii = 0; ii < 100; ii++){
-            if(ataque[ii]!= nullptr){
+        for (int ii = 0; ii < 100; ii++) {
+            if (ataque[ii] != nullptr) {
                 ataque[ii]->dibujar(window);
             }
         }
+        auto list = miMapa.getList();
+
+#ifdef DEBUG
+        for (int ii = 0; ii < list.getSize(); ii++) {
+            sf::RectangleShape cuadrado({list.get(ii)->width, list.get(ii)->height});
+            cuadrado.setPosition({list.get(ii)->left, list.get(ii)->top});
+            cuadrado.setOutlineColor(sf::Color::Red);
+            cuadrado.setOutlineThickness(2);
+            cuadrado.setFillColor(sf::Color::Transparent);
+            window.draw(cuadrado);
+        }
+#endif
         window.display();
 
     }
     return EXIT_SUCCESS;
 }
-int look_empty(Ataque *ataque[]){
-    for(int ii = 0; ii < 100; ii++){
-        if(ataque[ii] == nullptr)
+
+int look_empty(Ataque *ataque[]) {
+    for (int ii = 0; ii < 100; ii++) {
+        if (ataque[ii] == nullptr)
             return ii;
     }
     return -1;
 }
 
-int menu(){
-    sf::RenderWindow window (sf::VideoMode(1536, 850), "Menu");
+int menu() {
+    sf::RenderWindow window(sf::VideoMode(1536, 850), "Menu");
 
     // Menu
-    maniMenu menu(600,450);
+    maniMenu menu(600, 450);
 
-    while(window.isOpen()){
+    while (window.isOpen()) {
         sf::Event event;
 
-        while(window.pollEvent(event)){
-            switch(event.type){
+        while (window.pollEvent(event)) {
+            switch (event.type) {
                 case sf::Event::KeyReleased:
-                    switch(event.key.code){
+                    switch (event.key.code) {
                         case sf::Keyboard::Up:
                             menu.MoveUp();
                             break;
@@ -190,16 +195,16 @@ int menu(){
                             menu.MoveDown();
                             break;
                         case sf::Keyboard::Return:
-                            switch(menu.GetPressedItem()){
-                            case 0:
-                                std::cout<<"Has apretado el boton jugar"<<std::endl;
-                                break;
-                            case 1:
-                                std::cout<<"Has apretado el boton opciones"<<std::endl;
-                                break;
-                            case 2:
-                                window.close();
-                                break;
+                            switch (menu.GetPressedItem()) {
+                                case 0:
+                                    std::cout << "Has apretado el boton jugar" << std::endl;
+                                    break;
+                                case 1:
+                                    std::cout << "Has apretado el boton opciones" << std::endl;
+                                    break;
+                                case 2:
+                                    window.close();
+                                    break;
                             }
                             break;
                     }

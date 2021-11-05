@@ -4,6 +4,9 @@ include_directories("C:\\mingw64\\include")
 
 set(CMAKE_CXX_STANDARD 14)
 
+add_compile_definitions(DEBUG)
+
+
 if(WIN32)
     set(SFML_STATIC_LIBRARIES TRUE)
     set(TMXLITE_STATIC_LIB TRUE)
