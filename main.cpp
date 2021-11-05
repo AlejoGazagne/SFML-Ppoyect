@@ -16,7 +16,7 @@ int main() {
     float jumpF = 400;
     float gravityAcceleration = 9.8;
     // Gravedad
-    int mass = 60;
+    int mass = 57;
     sf::Clock delta;
     float deltaTime;
     bool whileJump;
@@ -80,7 +80,7 @@ int main() {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !player->getJumping()) {
             player->setSpeedvalue(jumpF / mass);
         }
-        cout << player->getPos().x << "\t" << player->getPos().y << endl;
+        //cout << player->getPos().x << "\t" << player->getPos().y << endl;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
             if (time >= 40) {
                 int idx = look_empty(ataque);
@@ -91,29 +91,7 @@ int main() {
             }
         }
         time++;
-///////////////////////////////////////////////////////////////////////////
-        /*switch(event.key.code){
-            case sf::Keyboard::Up:
-                menu.MoveUp();
-                break;
-            case sf::Keyboard::Down:
-                menu.MoveDown();
-                break;
-            case sf::Keyboard::Return:
-                switch(menu.GetPressedItem()){
-                case 0:
-                    std::cout<<"Has apretado el boton jugar"<<std::endl;
-                    break;
-                case 1:
-                    std::cout<<"Has apretado el boton opciones"<<std::endl;
-                    break;
-                case 2:
-                    window.close();
-                    break;
-                }
-            break;
-        }*/
-//////////////////////////////////////////////////////////////////////////
+
         player->colisiones(miMapa.getList(), deltaTime);
 
         //CREO PUNTERO ATAQUE
@@ -134,9 +112,8 @@ int main() {
         if (player->getPos().x < 1200) {
             cPos.x = 850;
         }
-        //if(player->getPos().y > 480){
         cPos.y = 480;
-        //}
+
         // Draw all elements
         window.clear();
         //menu.draw(window);

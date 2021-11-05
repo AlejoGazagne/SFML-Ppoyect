@@ -4,7 +4,7 @@ include_directories("C:\\mingw64\\include")
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_compile_definitions(DEBUG)
+#add_compile_definitions(DEBUG)
 
 
 if(WIN32)
