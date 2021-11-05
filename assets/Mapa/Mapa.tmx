@@ -49,7 +49,7 @@
   <object id="20" name="Pared" x="0" y="528" width="48" height="432"/>
   <object id="21" name="Pared" x="48" y="816" width="288" height="144"/>
   <object id="22" name="Pared" x="96" y="768" width="144" height="48"/>
-  <object id="23" name="Pared" x="432" y="951" width="336" height="9"/>
+  <object id="23" name="Pared" x="432" y="912.5" width="336" height="47.5"/>
   <object id="24" name="Pared" x="1056" y="768" width="720" height="192"/>
   <object id="25" name="Pared" x="960" y="864" width="96" height="96"/>
   <object id="26" name="Pared" x="1248" y="720" width="528" height="48"/>
@@ -70,10 +70,10 @@
   <object id="41" name="Pared" x="2736" y="528" width="96.6667" height="15.3333"/>
   <object id="42" name="Pared" x="2640" y="624" width="96.6667" height="15.3333"/>
   <object id="43" name="Pared" x="2736" y="720" width="95.3333" height="15.3333"/>
-  <object id="47" name="player" x="369.09" y="660.337">
+  <object id="47" name="player" x="2014.98" y="174.352">
    <point/>
   </object>
-  <object id="53" name="Pared" x="768" y="948.833" width="192" height="10.6667"/>
-  <object id="54" name="Pared" x="336" y="950.667" width="96" height="9.33333"/>
+  <object id="53" name="Pared" x="768" y="912.333" width="192" height="47.1667"/>
+  <object id="54" name="Pared" x="336" y="912.167" width="96" height="47.8333"/>
  </objectgroup>
 </map>

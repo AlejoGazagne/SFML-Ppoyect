@@ -29,35 +29,33 @@ void Personaje::colisiones(LinkedList<sf::Rect<float> *> list){
     for(int ii = 0; ii < list.getSize(); ii++){
         miRectangulo = list.get(ii);
         if(sp.getGlobalBounds().intersects(*miRectangulo)){
+            chocando = true;
             sp.setPosition(oldPos);
         }
     }
 
 }
 
-void Personaje::moverDerecha(){
+void Personaje::moverDerecha(float deltaTime){
     oldPos = sp.getPosition();
-    sp.move(5, 0);
+    sp.move(200*deltaTime, 0);
     ang = 0;
     sp.setScale(1,1);
 
 }
 
-void Personaje::moverIzquierda(){
+void Personaje::moverIzquierda(float deltaTime){
     oldPos = sp.getPosition();
-    sp.move(-5, 0);
+    sp.move(-200*deltaTime, 0);
     ang = 180;
     sp.setScale(-1,1);
 }
 
-void Personaje::saltar(){
+void Personaje::saltar(float deltaTime){
     oldPos = sp.getPosition();
-    sp.move(0, -10);
+    speedvalue -= gravityAcceleration*deltaTime;
+    sp.move(0, -speedvalue);
 
-}
-void Personaje::gravity() {
-    oldPos = sp.getPosition();
-    sp.move(0,10);
 }
 
 sf::Vector2f Personaje::getPos() const {
@@ -66,4 +64,12 @@ sf::Vector2f Personaje::getPos() const {
 
 float Personaje::getAng(){
     return ang;
+}
+
+void Personaje::setSpeedvalue(float speedvalue) {
+    Personaje::speedvalue = speedvalue;
+}
+
+bool Personaje::isChocando() const {
+    return chocando;
 }
