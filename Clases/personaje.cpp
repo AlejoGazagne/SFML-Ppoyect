@@ -7,14 +7,20 @@ Personaje::Personaje(int x, int y, float ang, const sf::Texture &tx) : x(x), y(y
     oldPos.y = y;
     speedX = 0;
     state = IDLE;
-    sp.setTexture(tx);
-    sp.setOrigin(sp.getGlobalBounds().width / 2, sp.getGlobalBounds().height / 2);
-    sp.setRotation(ang);
-    sp.setPosition(x, y);
+    anim.setTexture(tx);
+    anim.setFila(6);
+    anim.setColumna(8);
+    anim.setFps(5);
+    anim.setOrigin(anim.getGlobalBounds().width / 2, anim.getGlobalBounds().height / 2);
+    anim.setRotation(ang);
+    anim.setPosition(x, y);
+
+
 }
 
 void Personaje::dibujar(sf::RenderWindow &w) {
-    w.draw(sp);
+    anim.animate();
+    w.draw(anim);
 #ifdef DEBUG
     sf::RectangleShape cuadrado({sp.getGlobalBounds().width, sp.getGlobalBounds().height});
     cuadrado.setPosition({sp.getGlobalBounds().left, sp.getGlobalBounds().top});
@@ -30,13 +36,13 @@ void Personaje::colisiones(LinkedList<sf::Rect<float> *> list, float deltaTime) 
 
     // Para movimientos en Y
     speedY -= gravityAcceleration * deltaTime;
-    oldPos = sp.getPosition();
-    sp.move(0, -speedY);
+    oldPos = anim.getPosition();
+    anim.move(0, -speedY);
     for (int ii = 0; ii < list.getSize(); ii++) {
         miRectangulo = list.get(ii);
-        if (sp.getGlobalBounds().intersects(*miRectangulo)) {
+        if (anim.getGlobalBounds().intersects(*miRectangulo)) {
             chocando = true;
-            sp.setPosition(oldPos);
+            anim.setPosition(oldPos);
             if (state == JUMPING ) {
                 state = FALLING;
             }else if(state == FALLING) {
@@ -47,14 +53,14 @@ void Personaje::colisiones(LinkedList<sf::Rect<float> *> list, float deltaTime) 
     }
 
     // Para movimientos en X
-    oldPos = sp.getPosition();
-    sp.move(speedX, 0);
+    oldPos = anim.getPosition();
+    anim.move(speedX, 0);
     speedX = 0;
     for (int ii = 0; ii < list.getSize(); ii++) {
         miRectangulo = list.get(ii);
-        if (sp.getGlobalBounds().intersects(*miRectangulo)) {
+        if (anim.getGlobalBounds().intersects(*miRectangulo)) {
             chocando = true;
-            sp.setPosition(oldPos);
+            anim.setPosition(oldPos);
         }
     }
 }
@@ -62,17 +68,17 @@ void Personaje::colisiones(LinkedList<sf::Rect<float> *> list, float deltaTime) 
 void Personaje::moverDerecha(float deltaTime) {
     speedX = 200 * deltaTime;
     ang = 0;
-    sp.setScale(1, 1);
+    anim.setScale(1, 1);
 }
 
 void Personaje::moverIzquierda(float deltaTime) {
     speedX = -200 * deltaTime;
     ang = 180;
-    sp.setScale(-1, 1);
+    anim.setScale(-1, 1);
 }
 
 sf::Vector2f Personaje::getPos() const {
-    return sp.getPosition();
+    return anim.getPosition();
 }
 
 float Personaje::getAng() {

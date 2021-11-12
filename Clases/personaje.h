@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "LinkedList.h"
+#include "Animator.h"
 
 enum estados {
     JUMPING,
@@ -17,6 +18,7 @@ class Personaje {
     float speedY, speedX;
     bool chocando;
     estados state;
+    Animator anim;
 public:
     bool isChocando() const;
 

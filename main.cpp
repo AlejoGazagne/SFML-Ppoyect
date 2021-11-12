@@ -37,7 +37,7 @@ int main() {
     //Creo el personaje
     sf::Texture tx_player;
     sf::Sprite image_player;
-    if (!tx_player.loadFromFile("assets/personaje.png")) {
+    if (!tx_player.loadFromFile("assets/juntos.png")) {
         return EXIT_FAILURE;
     }
     image_player.setTexture(tx_player);

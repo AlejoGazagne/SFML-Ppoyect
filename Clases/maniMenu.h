@@ -1,6 +1,13 @@
 #ifndef MAIN_CPP_MANIMENU_H
 #define MAIN_CPP_MANIMENU_H
+
 #include "SFML/Graphics.hpp"
+
+enum faces {
+    MENU,
+    JUEGO,
+    GAMEOVER
+};
 
 #define MAX_NUMBER_OF_ITEMS 3
 
