@@ -12,14 +12,15 @@ Personaje::Personaje(int x, int y, float ang, const sf::Texture &tx) : x(x), y(y
     anim.setColumna(8);
     anim.setFps(5);
     anim.setOrigin(anim.getGlobalBounds().width / 2, anim.getGlobalBounds().height / 2);
-    anim.setRotation(ang);
     anim.setPosition(x, y);
 
 
 }
 
 void Personaje::dibujar(sf::RenderWindow &w) {
-    anim.animate();
+    std::cout << speedX << std::endl;
+    if (state == RUNNING)
+        anim.animate();
     w.draw(anim);
 #ifdef DEBUG
     sf::RectangleShape cuadrado({sp.getGlobalBounds().width, sp.getGlobalBounds().height});
@@ -43,9 +44,9 @@ void Personaje::colisiones(LinkedList<sf::Rect<float> *> list, float deltaTime) 
         if (anim.getGlobalBounds().intersects(*miRectangulo)) {
             chocando = true;
             anim.setPosition(oldPos);
-            if (state == JUMPING ) {
+            if (state == JUMPING) {
                 state = FALLING;
-            }else if(state == FALLING) {
+            } else if (state == FALLING) {
                 state = IDLE;
             }
             speedY = 0;
@@ -54,6 +55,12 @@ void Personaje::colisiones(LinkedList<sf::Rect<float> *> list, float deltaTime) 
 
     // Para movimientos en X
     oldPos = anim.getPosition();
+    if(state != JUMPING && state!= FALLING){
+        if(speedX!=0)
+            state = RUNNING;
+        else
+            state = IDLE;
+    }
     anim.move(speedX, 0);
     speedX = 0;
     for (int ii = 0; ii < list.getSize(); ii++) {
@@ -67,13 +74,13 @@ void Personaje::colisiones(LinkedList<sf::Rect<float> *> list, float deltaTime) 
 
 void Personaje::moverDerecha(float deltaTime) {
     speedX = 200 * deltaTime;
-    ang = 0;
+    goingLeft = false;
     anim.setScale(1, 1);
 }
 
 void Personaje::moverIzquierda(float deltaTime) {
     speedX = -200 * deltaTime;
-    ang = 180;
+    goingLeft = true;
     anim.setScale(-1, 1);
 }
 
@@ -81,8 +88,8 @@ sf::Vector2f Personaje::getPos() const {
     return anim.getPosition();
 }
 
-float Personaje::getAng() {
-    return ang;
+bool Personaje::getLeft() {
+    return goingLeft;
 }
 
 void Personaje::setSpeedvalue(float speedvalue) {

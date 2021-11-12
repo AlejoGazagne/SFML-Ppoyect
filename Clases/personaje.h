@@ -8,13 +8,14 @@
 enum estados {
     JUMPING,
     FALLING,
-    IDLE
+    IDLE,
+    RUNNING,
 };
 
 class Personaje {
     float gravityAcceleration = 9.8;
     int x, y;
-    float ang;
+    bool goingLeft;
     float speedY, speedX;
     bool chocando;
     estados state;
@@ -41,7 +42,7 @@ public:
     //void gravity();
     sf::Vector2f getPos() const;
 
-    float getAng();
+    bool getLeft();
 
     void colisiones(LinkedList<sf::Rect<float> *> list, float deltaTime);
 

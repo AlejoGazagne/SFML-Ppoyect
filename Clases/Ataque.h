@@ -8,9 +8,10 @@ class Ataque {
 private:
     sf::Sprite sp;
     int timeout;
+    bool left;
 public:
     void dibujar(sf::RenderWindow &w);
-    Ataque(sf::Vector2f pos, float ang, const sf::Texture &tx);
+    Ataque(sf::Vector2f pos, bool left, const sf::Texture &tx);
     void simular();
     int getTimeout() const;
 };
