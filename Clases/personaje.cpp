@@ -29,16 +29,6 @@ void Personaje::dibujar(sf::RenderWindow &w) {
     w.draw(cuadrado);
 #endif
 
-    if (!tx_Vida.loadFromFile("assets/heart.png")) {
-        cout << "No se pudo cargar juntos.png" << endl;
-    }
-    image_Vida.setTexture(tx_Vida);
-    int h = 10;
-    for(int ii = 0; ii < 4;ii++){
-        image_Vida.setPosition(h, 20);
-        w.draw(image_Vida);
-        h = h + 40;
-    }
 
 }
 

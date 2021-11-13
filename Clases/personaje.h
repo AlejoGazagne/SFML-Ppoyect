@@ -21,7 +21,6 @@ private:
     int x, y;
     bool goingLeft;
     float speedY, speedX;
-    int vidas;
     estados state;
     Animator anim;
     sf::Vector2f oldPos;

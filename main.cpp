@@ -5,6 +5,7 @@
 #include "Clases/MapaTMX.h"
 #include "Clases/maniMenu.h"
 #include "Clases/Game.h"
+#include "Clases/enemigos.h"
 
 int main() {
     int wasd = 1;
@@ -60,9 +61,5 @@ int main() {
         window.display();
     }
 
-
-
-
-
-return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }

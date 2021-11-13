@@ -7,6 +7,7 @@
 #include <tmxlite/TileLayer.hpp>
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <stack>
 #include "LinkedList.h"
 
 using namespace std;
@@ -15,6 +16,7 @@ class MapaTMX {
 private:
     tmx::Map map;
     sf::Texture textura;
+    stack<sf::Vector2<float> *> enemigos;
     LinkedList<sf::Sprite *> sprites;
     LinkedList<sf::Rect<float> *> list;
     sf::Vector2u tile_size;
@@ -76,8 +78,9 @@ public:
                     if(objects[j].getName() == "Pared"){
                         //sf::Rect<int> paredes(objects[j].getAABB().left, objects[j].getAABB().top, objects[j].getAABB().width, objects[j].getAABB().height);
                         list.push_front(new sf::Rect<float> (objects[j].getAABB().left, objects[j].getAABB().top, objects[j].getAABB().width, objects[j].getAABB().height));
-
-
+                    }
+                    if(objects[j].getName() == "Enemy"){
+                        enemigos.push(new sf::Vector2<float> (objects[j].getPosition().x, objects[j].getPosition().y));
                     }
 
                     if (objects[j].getName() == "player") {
@@ -96,6 +99,10 @@ public:
 
     const LinkedList<sf::Rect<float> *> &getList() const {
         return list;
+    }
+
+    const stack<sf::Vector2<float> *> &getEnemigos() const {
+        return enemigos;
     }
 
     Personaje *getPlayer() {
