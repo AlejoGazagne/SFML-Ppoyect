@@ -17,10 +17,6 @@ Personaje::Personaje(int x, int y, const sf::Texture &tx) : x(x), y(y), tx(tx) {
 }
 
 void Personaje::dibujar(sf::RenderWindow &w) {
-<<<<<<< HEAD
-=======
-    std::cout << speedX << std::endl;
->>>>>>> 5d8298107ccbc1fd0f3e651b3ada9c740f1b12a5
     if (state == RUNNING)
         anim.animate();
     w.draw(anim);

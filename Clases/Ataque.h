@@ -13,12 +13,8 @@ private:
     int timeout;
     bool left;
 public:
-<<<<<<< HEAD
-    bool dibujar(sf::RenderWindow &w, LinkedList<sf::Rect<float> *> list);
-=======
-    void dibujar(sf::RenderWindow &w);
->>>>>>> 5d8298107ccbc1fd0f3e651b3ada9c740f1b12a5
     Ataque(sf::Vector2f pos, bool left, const sf::Texture &tx);
+    bool dibujar(sf::RenderWindow &w, LinkedList<sf::Rect<float> *> list);
     void simular();
     int getTimeout() const;
 };

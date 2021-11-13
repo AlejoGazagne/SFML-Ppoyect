@@ -2,7 +2,6 @@
 #include <cmath>
 
 Ataque::Ataque(sf::Vector2f pos, bool left, const sf::Texture &tx) {
-<<<<<<< HEAD
     posx = sp.getPosition().x;
     posy = sp.getPosition().y;
     sp.setOrigin(sp.getGlobalBounds().width /2, sp.getGlobalBounds().height/2 );
@@ -10,18 +9,10 @@ Ataque::Ataque(sf::Vector2f pos, bool left, const sf::Texture &tx) {
     if (left)
         sp.scale(-1, 1);
     sp.setPosition(pos.x, pos.y-7);
-=======
-    sp.setOrigin(sp.getGlobalBounds().width / 2, sp.getGlobalBounds().height / 2);
-    this->left = left;
-    if (left)
-        sp.scale(-1, 1);
-    sp.setPosition(pos.x, pos.y);
->>>>>>> 5d8298107ccbc1fd0f3e651b3ada9c740f1b12a5
     sp.setTexture(tx);
     timeout = 200;
 }
 
-<<<<<<< HEAD
 /*bool colisiones(LinkedList<sf::Rect<float> *> list, int posx){
     sf::Rect<float> *miRectangulo;
 
@@ -35,9 +26,6 @@ Ataque::Ataque(sf::Vector2f pos, bool left, const sf::Texture &tx) {
 }*/
 
 bool Ataque::dibujar(sf::RenderWindow &w, LinkedList<sf::Rect<float> *> list) {
-=======
-void Ataque::dibujar(sf::RenderWindow &w) {
->>>>>>> 5d8298107ccbc1fd0f3e651b3ada9c740f1b12a5
     w.draw(sp);
     sf::Rect<float> *miRectangulo;
 
