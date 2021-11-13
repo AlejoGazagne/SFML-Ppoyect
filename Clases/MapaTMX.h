@@ -81,7 +81,7 @@ public:
                     }
 
                     if (objects[j].getName() == "player") {
-                        player = new Personaje(objects[j].getPosition().x, objects[j].getPosition().y, objects[j].getRotation(),pl_tx);
+                        player = new Personaje(objects[j].getPosition().x, objects[j].getPosition().y,pl_tx);
                     }
                 }
             }

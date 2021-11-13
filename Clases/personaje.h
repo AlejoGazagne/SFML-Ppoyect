@@ -2,33 +2,38 @@
 #define PROYECTO_INFOII_PERSONAJE1_H
 
 #include <SFML/Graphics.hpp>
+#include <queue>
 #include "LinkedList.h"
 #include "Animator.h"
+
+using namespace std;
 
 enum estados {
     JUMPING,
     FALLING,
-    IDLE
+    IDLE,
+    RUNNING,
 };
 
 class Personaje {
+private:
     float gravityAcceleration = 9.8;
     int x, y;
-    float ang;
+    bool goingLeft;
     float speedY, speedX;
-    bool chocando;
+    int vidas;
     estados state;
     Animator anim;
-public:
-    bool isChocando() const;
-
-private:
     sf::Vector2f oldPos;
     sf::Sprite sp;
     sf::Texture tx;
+    // Vidas
+    queue<int> vida;
+    sf::Texture tx_Vida;
+    sf::Sprite image_Vida;
 
 public:
-    Personaje(int x, int y, float ang, const sf::Texture &tx);
+    Personaje(int x, int y, const sf::Texture &tx);
 
     void dibujar(sf::RenderWindow &w);
 
@@ -38,10 +43,9 @@ public:
 
     void move(float deltaTime);
 
-    //void gravity();
     sf::Vector2f getPos() const;
 
-    float getAng();
+    bool getLeft();
 
     void colisiones(LinkedList<sf::Rect<float> *> list, float deltaTime);
 

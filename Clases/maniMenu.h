@@ -3,13 +3,7 @@
 
 #include "SFML/Graphics.hpp"
 
-enum faces {
-    MENU,
-    JUEGO,
-    GAMEOVER
-};
-
-#define MAX_NUMBER_OF_ITEMS 3
+#define MAX_NUMBER_OF_ITEMS 4
 
 class maniMenu {
 
@@ -25,6 +19,8 @@ private:
     int selectedItemIndex;
     sf::Font font;
     sf::Text menu[MAX_NUMBER_OF_ITEMS];
+    sf::Texture texture1;
+    sf::Sprite image1;
 };
 
 

@@ -16,7 +16,7 @@ void Animator::setColumna(int columna) {
 
 void Animator::animate() {
     sf::IntRect rect = this->getTextureRect();
-    auto anchoColumna = columna;
+    auto anchoColumna = this->getTexture()->getSize().x / columna;
 
     fpsActual++;
     if(fpsActual < fps)
