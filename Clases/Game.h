@@ -1,8 +1,17 @@
+<<<<<<< HEAD
 #ifndef MAIN_CPP_GAME_H
 #define MAIN_CPP_GAME_H
 #include <queue>
 
 int look_empty(Ataque *ataque[]);
+=======
+//
+// Created by martin on 12/11/21.
+//
+
+#ifndef MAIN_CPP_GAME_H
+#define MAIN_CPP_GAME_H
+>>>>>>> 5d8298107ccbc1fd0f3e651b3ada9c740f1b12a5
 
 class Game {
     sf::View camera;
@@ -16,6 +25,7 @@ class Game {
     sf::Clock delta;
     float deltaTime;
     bool whileJump;
+<<<<<<< HEAD
     // Personaje
     sf::Texture tx_player;
     sf::Sprite image_player;
@@ -28,6 +38,16 @@ class Game {
     sf::Texture tx_Mapa;
     sf::Sprite image_Mapa;
 
+=======
+    sf::Texture tx_player;
+    sf::Sprite image_player;
+    Personaje *player;
+    Ataque **ataque = new Ataque *[100];
+    sf::Texture tx_ataque;
+    MapaTMX *miMapa;
+    sf::Texture tx_Mapa;
+    sf::Sprite image_Mapa;
+>>>>>>> 5d8298107ccbc1fd0f3e651b3ada9c740f1b12a5
 public:
 
     Game(sf::RenderWindow &window) {
@@ -70,9 +90,13 @@ public:
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !player->getJumping()) {
             player->setSpeedvalue(jumpF / mass);
         }
+<<<<<<< HEAD
         /*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 
         }*/
+=======
+        //cout << player->getPos().x << "\t" << player->getPos().y << endl;
+>>>>>>> 5d8298107ccbc1fd0f3e651b3ada9c740f1b12a5
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
             if (time >= 40) {
                 int idx = look_empty(ataque);
@@ -90,7 +114,11 @@ public:
         for (int ii = 0; ii < 100; ii++) {
             if (ataque[ii] != nullptr) {
                 ataque[ii]->simular();
+<<<<<<< HEAD
                 if(ataque[ii]->dibujar(window, miMapa->getList()) == true){
+=======
+                if (ataque[ii]->getTimeout() < 0) {
+>>>>>>> 5d8298107ccbc1fd0f3e651b3ada9c740f1b12a5
                     delete ataque[ii];
                     ataque[ii] = nullptr;
                 }
@@ -100,7 +128,10 @@ public:
         //Movimiento de camara
         if (player->getPos().x > 1200) {
             cPos.x = 2030;
+<<<<<<< HEAD
             player->dibujar(window);
+=======
+>>>>>>> 5d8298107ccbc1fd0f3e651b3ada9c740f1b12a5
         }
         if (player->getPos().x < 1200) {
             cPos.x = 850;
@@ -109,13 +140,21 @@ public:
 
         // Draw all elements
         window.clear();
+<<<<<<< HEAD
+=======
+        //menu.draw(window);
+>>>>>>> 5d8298107ccbc1fd0f3e651b3ada9c740f1b12a5
         camera.setCenter(cPos.x, cPos.y);
         window.setView(camera);
         miMapa->dibujar(window);
         player->dibujar(window);
         for (int ii = 0; ii < 100; ii++) {
             if (ataque[ii] != nullptr) {
+<<<<<<< HEAD
                 ataque[ii]->dibujar(window, miMapa->getList());
+=======
+                ataque[ii]->dibujar(window);
+>>>>>>> 5d8298107ccbc1fd0f3e651b3ada9c740f1b12a5
             }
         }
         auto list = miMapa->getList();
@@ -134,7 +173,10 @@ public:
 
         return 1;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5d8298107ccbc1fd0f3e651b3ada9c740f1b12a5
     int look_empty(Ataque *ataque[]) {
         for (int ii = 0; ii < 100; ii++) {
             if (ataque[ii] == nullptr)
