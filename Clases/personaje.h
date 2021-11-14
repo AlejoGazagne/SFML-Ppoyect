@@ -33,6 +33,7 @@ private:
 
 public:
     Personaje(int x, int y, const sf::Texture &tx);
+    int vidas;
 
     void dibujar(sf::RenderWindow &w);
 
@@ -51,6 +52,40 @@ public:
     void setSpeedvalue(float speedvalue);
 
     bool getJumping();
+
+    //FUNCION VIDA
+    //FUNCIONES DE VIDA
+
+    void Setvidas(int value){
+        vidas += value;
+    }
+    int Getvidas(){
+        return vidas;
+    }
+
+//Mostrar vidas
+    void Mostrar(sf::RenderWindow &window ){
+
+        window.setVerticalSyncEnabled(true);
+
+        sf::Text texto;
+        sf::String cadena;
+        cadena = "La vida es:";
+
+        texto.setString(cadena);
+        texto.setCharacterSize(40);
+        texto.setPosition(400,300);
+        texto.rotate(20);
+
+        window.draw(texto);
+        window.display();
+
+    }
+
+
+
+
+
 };
 
 #endif //PROYECTO_INFOII_PERSONAJE1_H
