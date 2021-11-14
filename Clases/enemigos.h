@@ -13,7 +13,6 @@ private:
 
     sf::Texture *tEnemy;
     sf::Sprite *sEnemy;
-    sf::Texture tx;
 public:
     Enemigos();
 

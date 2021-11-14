@@ -64,7 +64,6 @@ public:
     }
 
     int loop(sf::RenderWindow &window){
-
         deltaTime = delta.restart().asSeconds();
         // Process events
         sf::Event event;
@@ -121,10 +120,15 @@ public:
         }
         cPos.y = 480;
 
-        for (en.iterInit(); !en.iterEnd(); en.iterNext()) {
-            enem->dibujar(window);
 
-        }
+        /*for (en.iterInit(); !en.iterEnd(); en.iterNext()) {
+            int ii = 0;
+            enem = en.get(ii);
+            enem->dibujar(window);
+            cout<<"Revisa la lista de enemigos"<<endl;
+            ii++;
+            en.remove(ii);
+        }*/
 
         // Draw all elements
         window.clear();
