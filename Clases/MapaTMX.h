@@ -9,6 +9,7 @@
 #include <string>
 #include <stack>
 #include "LinkedList.h"
+#include "enemigos.h"
 
 using namespace std;
 
@@ -16,17 +17,16 @@ class MapaTMX {
 private:
     tmx::Map map;
     sf::Texture textura;
-    stack<sf::Vector2<float> *> enemigos;
     LinkedList<sf::Sprite *> sprites;
     LinkedList<sf::Rect<float> *> list;
     sf::Vector2u tile_size;
     uint32_t columns;
     Personaje *player;
-
+    sf::Rect<float> salida;
 
 public:
 
-    explicit MapaTMX(const string &archivo, sf::Texture &pl_tx) {
+    explicit MapaTMX(const string &archivo, sf::Texture &pl_tx, LinkedList<Enemigos *> &enemies) {
         if (!map.load(archivo))
             throw "Cannot open map";
 
@@ -72,17 +72,16 @@ public:
                 const auto &objectLayer = layers[i]->getLayerAs<tmx::ObjectGroup>();
                 const auto &objects = objectLayer.getObjects();
                 for (int j = 0; j < objects.size(); ++j) {
-                    //cout << objects[j].getName() << " ";
-                    //cout << objects[j].getPosition().x << " " << objects[j].getPosition().y <<endl;
-
                     if(objects[j].getName() == "Pared"){
-                        //sf::Rect<int> paredes(objects[j].getAABB().left, objects[j].getAABB().top, objects[j].getAABB().width, objects[j].getAABB().height);
                         list.push_front(new sf::Rect<float> (objects[j].getAABB().left, objects[j].getAABB().top, objects[j].getAABB().width, objects[j].getAABB().height));
                     }
-                    if(objects[j].getName() == "Enemy"){
-                        enemigos.push(new sf::Vector2<float> (objects[j].getPosition().x, objects[j].getPosition().y));
+                    if(objects[j].getName() == "Enemigo"){
+                        auto *enemy = new Enemigos();
+                        enemy->getSprite().setPosition(objects[j].getPosition().x, objects[j].getPosition().y);
+                        enemy->getSprite().setOrigin((float) enemy->getTexture().getSize().x / 2,
+                                                     (float) enemy->getTexture().getSize().y / 2);
+                        enemies.push_front(enemy);
                     }
-
                     if (objects[j].getName() == "player") {
                         player = new Personaje(objects[j].getPosition().x, objects[j].getPosition().y,pl_tx);
                     }
@@ -101,13 +100,10 @@ public:
         return list;
     }
 
-    const stack<sf::Vector2<float> *> &getEnemigos() const {
-        return enemigos;
-    }
-
     Personaje *getPlayer() {
         return player;
     }
+
 };
 
 #endif //TESTSFML_MAPATMX_H

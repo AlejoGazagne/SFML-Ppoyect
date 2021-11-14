@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="60" height="20" tilewidth="48" tileheight="48" infinite="0" nextlayerid="3" nextobjectid="68">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="60" height="20" tilewidth="48" tileheight="48" infinite="0" nextlayerid="3" nextobjectid="74">
  <tileset firstgid="1" name="Final" tilewidth="48" tileheight="48" tilecount="1200" columns="60">
   <image source="Final.png" width="2880" height="960"/>
  </tileset>
@@ -81,6 +81,18 @@
   <object id="65" name="Pared" x="2735" y="514.75" width="96.6667" height="15.1666"/>
   <object id="66" name="Pared" x="2641" y="384.833" width="45.6667" height="14.6667"/>
   <object id="67" name="Enemigo" x="472" y="626.667">
+   <point/>
+  </object>
+  <object id="68" name="Enemigo" x="697.333" y="554.667">
+   <point/>
+  </object>
+  <object id="69" name="Enemigo" x="1009.33" y="581.333">
+   <point/>
+  </object>
+  <object id="70" name="Enemigo" x="850.667" y="769.333">
+   <point/>
+  </object>
+  <object id="71" name="Enemigo" x="661.333" y="721.333">
    <point/>
   </object>
  </objectgroup>

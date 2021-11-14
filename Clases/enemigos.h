@@ -2,7 +2,6 @@
 #define MAIN_CPP_ENEMIGOS_H
 
 #include <SFML/Graphics.hpp>
-#include <stack>
 #include "LinkedList.h"
 
 class Enemigos {
@@ -11,11 +10,15 @@ private:
     int x, y;
     float speedY, speedX;
     sf::Vector2f oldPos;
-    sf::Sprite sp;
+
+    sf::Texture *tEnemy;
+    sf::Sprite *sEnemy;
     sf::Texture tx;
 public:
-    Enemigos(const sf::Texture &tx, std::stack<sf::Vector2<float> * > enemigos);
+    Enemigos();
 
+    sf::Sprite &getSprite ();
+    sf::Texture &getTexture ();
     void dibujar(sf::RenderWindow &w);
 
     void colision(LinkedList<sf::Rect<float> *> list, float deltaTime);

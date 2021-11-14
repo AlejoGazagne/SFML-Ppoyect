@@ -1,12 +1,14 @@
 #ifndef MAIN_CPP_GAME_H
 #define MAIN_CPP_GAME_H
 #include <queue>
+#include "LinkedList.h"
 #include <stack>
 #include "enemigos.h"
 
 int look_empty(Ataque *ataque[]);
 
 class Game {
+    sf::Window window;
     sf::View camera;
     int time = 70, a = 0;
     sf::Vector2i cPos;
@@ -30,10 +32,9 @@ class Game {
     sf::Texture tx_Mapa;
     sf::Sprite image_Mapa;
     // ENEMIGOS
-    sf::Texture tx_enemy;
-    sf::Sprite image_enemy;
-    stack<sf::Vector2<float>> en;
-    Enemigos *enemy;
+    Enemigos *enem;
+    LinkedList<Enemigos*> en;
+
 
 public:
 
@@ -48,11 +49,7 @@ public:
         }
         image_player.setTexture(tx_player);
 
-        // CREO LA TEXTURA DEL ENEMIGO
-        if (!tx_enemy.loadFromFile("assets/juntos.png")) {
-            cout << "No se pudo cargar juntos.png" << endl;
-        }
-        image_enemy.setTexture(tx_enemy);
+
 
         //CREO TEXTURA DEL ATAQUE
         for (int ii = 0; ii < 100; ii++) {
@@ -61,10 +58,9 @@ public:
         if (!tx_ataque.loadFromFile("assets/espada.png"))
             cout << "No se pudo cargar espada.png" << endl;
 
-        miMapa = new MapaTMX("assets/Mapa/Mapa.tmx", tx_player);
+        miMapa = new MapaTMX("assets/Mapa/Mapa.tmx", tx_player, en);
         player = miMapa->getPlayer();
 
-         en = miMapa->getEnemigos();
     }
 
     int loop(sf::RenderWindow &window){
@@ -125,11 +121,15 @@ public:
         }
         cPos.y = 480;
 
+        for (en.iterInit(); !en.iterEnd(); en.iterNext()) {
+            enem->dibujar(window);
+
+        }
+
         // Draw all elements
         window.clear();
         camera.setCenter(cPos.x, cPos.y);
         window.setView(camera);
-        enemy->dibujar(window);
         miMapa->dibujar(window);
         player->dibujar(window);
         for (int ii = 0; ii < 100; ii++) {
