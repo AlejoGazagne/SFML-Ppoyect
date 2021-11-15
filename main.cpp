@@ -7,14 +7,13 @@
 #include "Clases/Game.h"
 
 int main() {
-    int wasd = 1;
+    int wasd = 1, men = 0;
     //Crear ventana y mostrar el mapa
     sf::RenderWindow window(sf::VideoMode(1536, 850), "Proyecto Info II");
     window.setFramerateLimit(60);
 
     maniMenu menu(1536, 850);
     Game juego(window);
-
 
     // Main loop
     while (window.isOpen()) {
@@ -38,13 +37,13 @@ int main() {
                                     }
                                     break;
                                 case 1:
-                                    std::cout << "Has apretado el boton controles" << std::endl;
-                                    break;
-                                case 2:
                                     std::cout << "Has apretado el boton puntajes" << std::endl;
                                     break;
-                                case 3:
+                                case 2:
                                     window.close();
+                                    break;
+                                case 3:
+                                    maniMenu menu(1536, 850);
                                     break;
                             }
                             break;
@@ -54,6 +53,7 @@ int main() {
                     window.close();
                     break;
             }
+
         }
         window.clear();
         menu.draw(window);

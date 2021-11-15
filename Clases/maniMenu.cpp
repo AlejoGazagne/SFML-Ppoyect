@@ -23,12 +23,6 @@ maniMenu::maniMenu(float width, float height){
     menu[2].setString("Exit");
     menu[2].setPosition(sf::Vector2f(width/5, height /(MAX_NUMBER_OF_ITEMS +1)*1.5));
 
-    /*menu[3].setFont(font);
-    menu[3].setColor(sf::Color::White);
-    menu[3].getCharacterSize();
-    menu[3].setString("Exit");
-    menu[3].setPosition(sf::Vector2f(width/5, height /(MAX_NUMBER_OF_ITEMS +1)*2));*/
-
     selectedItemIndex = 0;
 
 }

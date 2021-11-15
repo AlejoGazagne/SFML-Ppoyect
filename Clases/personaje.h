@@ -5,6 +5,7 @@
 #include <queue>
 #include "LinkedList.h"
 #include "Animator.h"
+#include "Coin.h"
 
 using namespace std;
 
@@ -52,6 +53,14 @@ public:
     void setSpeedvalue(float speedvalue);
 
     bool getJumping();
+
+    // COINS
+    bool isCollindingWhithCoin(Coin *coin){
+        if(anim.getGlobalBounds().intersects(coin->getGlobalBounds())){
+            return true;
+        }
+        return false;
+    }
 
     //FUNCION VIDA
     //FUNCIONES DE VIDA

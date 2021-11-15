@@ -4,6 +4,13 @@
 #include "LinkedList.h"
 #include <stack>
 #include "enemigos.h"
+#include "Coin.h"
+
+enum fases {
+    WIN,
+    GAME,
+    GAMEOVER,
+    };
 
 int look_empty(Ataque *ataque[]);
 
@@ -35,6 +42,13 @@ class Game {
     Enemigos *enem;
     LinkedList<Enemigos*> en;
 
+    fases state;
+
+    // Tiempo de juego
+    int tiempoJuego = 0;
+    int puntaje;
+    int setCoin = 0;
+
 
 public:
 
@@ -49,8 +63,6 @@ public:
         }
         image_player.setTexture(tx_player);
 
-
-
         //CREO TEXTURA DEL ATAQUE
         for (int ii = 0; ii < 100; ii++) {
             ataque[ii] = nullptr;
@@ -61,17 +73,34 @@ public:
         miMapa = new MapaTMX("assets/Mapa/Mapa.tmx", tx_player, en);
         player = miMapa->getPlayer();
 
+
+
     }
 
     int loop(sf::RenderWindow &window){
         deltaTime = delta.restart().asSeconds();
+
+        // Coin
+        vector<Coin*> coinVec;
+        Coin coin1({20,20});
+        Coin coin2({20,20});
+        coinVec.push_back(&coin1);
+        coinVec.push_back(&coin2);
+        coin1.setPos({800, 700});
+        coin2.setPos({400, 400});
+
+        for(int ii = 0; ii < coinVec.size(); ii++){
+            if(player->isCollindingWhithCoin(coinVec[ii])){
+                coinVec[ii]->setPos({500000,50000});
+            }
+        }
+
         // Process events
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        // Update world parameters
 
         // Mover player
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
@@ -83,9 +112,6 @@ public:
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !player->getJumping()) {
             player->setSpeedvalue(jumpF / mass);
         }
-        /*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-
-        }*/
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
             if (time >= 40) {
                 int idx = look_empty(ataque);
@@ -95,7 +121,7 @@ public:
                 }
             }
         }
-        time++;
+
 
         player->colisiones(miMapa->getList(), deltaTime);
 
@@ -130,12 +156,28 @@ public:
             en.remove(ii);
         }*/
 
+        /*if(tiempoJuego/60 > 10){
+            tiempoJuego = 0;
+            state = GAMEOVER;
+            return state+1;
+        }*/
+
+        time++;
+        tiempoJuego++;
         // Draw all elements
         window.clear();
         camera.setCenter(cPos.x, cPos.y);
         window.setView(camera);
         miMapa->dibujar(window);
         player->dibujar(window);
+        coin1.draw(window);
+        coin2.draw(window);
+        for(int ii = 0; ii < coinVec.size(); ii++){
+            if(player->isCollindingWhithCoin(coinVec[ii])){
+                coinVec[ii]->setPos({500000,50000});
+                coinVec.pop_back();
+            }
+        }
         for (int ii = 0; ii < 100; ii++) {
             if (ataque[ii] != nullptr) {
                 ataque[ii]->dibujar(window, miMapa->getList());
@@ -155,7 +197,7 @@ public:
 #endif
         window.display();
 
-        return 1;
+        return GAME;
     }
 
     int look_empty(Ataque *ataque[]) {
