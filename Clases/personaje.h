@@ -56,7 +56,7 @@ public:
 
     // COINS
     bool isCollindingWhithCoin(Coin *coin){
-        if(anim.getGlobalBounds().intersects(coin->getGlobalBounds())){
+        if(anim.getGlobalBounds().contains(coin->getPosition())){
             return true;
         }
         return false;

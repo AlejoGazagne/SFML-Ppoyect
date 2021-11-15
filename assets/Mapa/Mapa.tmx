@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="60" height="20" tilewidth="48" tileheight="48" infinite="0" nextlayerid="3" nextobjectid="74">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="60" height="20" tilewidth="48" tileheight="48" infinite="0" nextlayerid="3" nextobjectid="82">
  <tileset firstgid="1" name="Final" tilewidth="48" tileheight="48" tilecount="1200" columns="60">
   <image source="Final.png" width="2880" height="960"/>
  </tileset>
@@ -93,6 +93,21 @@
    <point/>
   </object>
   <object id="71" name="Enemigo" x="661.333" y="721.333">
+   <point/>
+  </object>
+  <object id="74" name="Coin" x="932" y="144">
+   <point/>
+  </object>
+  <object id="78" name="Coin" x="377.333" y="142.667">
+   <point/>
+  </object>
+  <object id="79" name="Coin" x="397.333" y="388">
+   <point/>
+  </object>
+  <object id="80" name="Coin" x="344" y="665.333">
+   <point/>
+  </object>
+  <object id="81" name="Coin" x="553.333" y="892">
    <point/>
   </object>
  </objectgroup>

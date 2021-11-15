@@ -14,12 +14,10 @@ public:
     void draw(sf::RenderWindow &window){
         window.draw(coin);
     }
-    sf::FloatRect getGlobalBounds(){
-        return coin.getGlobalBounds();
+    sf::Vector2f getPosition(){
+        return coin.getPosition();
     }
     void setPos(sf::Vector2f newPos){
-        posx = newPos.x;
-        posy = newPos.y;
         coin.setPosition(newPos);
     }
 

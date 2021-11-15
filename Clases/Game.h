@@ -47,7 +47,12 @@ class Game {
     // Tiempo de juego
     int tiempoJuego = 0;
     int puntaje;
-    int setCoin = 0;
+
+    //coin Con tiled
+    Coin *coinTi;
+    LinkedList<sf::Vector2<Coin*> > lista;
+    ////////////////////////////////
+
 
 
 public:
@@ -70,7 +75,7 @@ public:
         if (!tx_ataque.loadFromFile("assets/espada.png"))
             cout << "No se pudo cargar espada.png" << endl;
 
-        miMapa = new MapaTMX("assets/Mapa/Mapa.tmx", tx_player, en);
+        miMapa = new MapaTMX("assets/Mapa/Mapa.tmx", tx_player, en, lista);
         player = miMapa->getPlayer();
 
 
@@ -80,20 +85,18 @@ public:
     int loop(sf::RenderWindow &window){
         deltaTime = delta.restart().asSeconds();
 
+
+
         // Coin
         vector<Coin*> coinVec;
         Coin coin1({20,20});
         Coin coin2({20,20});
         coinVec.push_back(&coin1);
         coinVec.push_back(&coin2);
-        coin1.setPos({800, 700});
-        coin2.setPos({400, 400});
-
-        for(int ii = 0; ii < coinVec.size(); ii++){
-            if(player->isCollindingWhithCoin(coinVec[ii])){
-                coinVec[ii]->setPos({500000,50000});
-            }
-        }
+        //coin1.setPos({800, 700});
+        //coin2.setPos({400, 400});
+        coinVec[0]->setPos({800, 700});
+        coinVec[1]->setPos({400, 400});
 
         // Process events
         sf::Event event;
@@ -170,12 +173,12 @@ public:
         window.setView(camera);
         miMapa->dibujar(window);
         player->dibujar(window);
-        coin1.draw(window);
-        coin2.draw(window);
+        for(int ii = 1; ii < coinVec.size(); ii++){
+            coinVec[ii]->draw(window);
+        }
         for(int ii = 0; ii < coinVec.size(); ii++){
             if(player->isCollindingWhithCoin(coinVec[ii])){
                 coinVec[ii]->setPos({500000,50000});
-                coinVec.pop_back();
             }
         }
         for (int ii = 0; ii < 100; ii++) {
