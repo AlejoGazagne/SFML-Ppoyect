@@ -100,6 +100,16 @@ void Personaje::move(float deltaTime) {
 
 bool Personaje::getJumping() {
     return state == JUMPING;
+
 }
 
+Personaje::Personaje(int vidas) : vidas(vidas) {
 
+    fuente1 = new sf::Font();
+    txt_vidas = new sf::Text();
+    txt_vidas->setFont(*fuente1);
+
+    txt_vidas->setString("Hola");
+    txt_vidas->setPosition(400, 300);
+    txt_vidas->setColor(sf::Color::Green);
+}

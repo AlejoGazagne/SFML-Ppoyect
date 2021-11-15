@@ -49,6 +49,9 @@ class Game {
     int puntaje;
     int setCoin = 0;
 
+    //vida
+    int vidas;
+
 
 public:
 
