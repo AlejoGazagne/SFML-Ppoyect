@@ -54,6 +54,9 @@ class Game {
     ////////////////////////////////
 
 
+    //vida
+    int vidas;
+
 
 public:
 

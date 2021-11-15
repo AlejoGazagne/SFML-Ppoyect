@@ -28,13 +28,16 @@ private:
     sf::Sprite sp;
     sf::Texture tx;
     // Vidas
+    int vidas;
     queue<int> vida;
     sf::Texture tx_Vida;
     sf::Sprite image_Vida;
 
 public:
     Personaje(int x, int y, const sf::Texture &tx);
-    int vidas;
+
+    Personaje(int vidas);
+
 
     void dibujar(sf::RenderWindow &w);
 
@@ -61,39 +64,9 @@ public:
         }
         return false;
     }
-
-    //FUNCION VIDA
-    //FUNCIONES DE VIDA
-
-    void Setvidas(int value){
-        vidas += value;
-    }
-    int Getvidas(){
-        return vidas;
-    }
-
-//Mostrar vidas
-    void Mostrar(sf::RenderWindow &window ){
-
-        window.setVerticalSyncEnabled(true);
-
-        sf::Text texto;
-        sf::String cadena;
-        cadena = "La vida es:";
-
-        texto.setString(cadena);
-        texto.setCharacterSize(40);
-        texto.setPosition(400,300);
-        texto.rotate(20);
-
-        window.draw(texto);
-        window.display();
-
-    }
-
-
-
-
+    //vidas
+ sf::Font *fuente1;
+    sf::Text * txt_vidas;
 
 };
 
