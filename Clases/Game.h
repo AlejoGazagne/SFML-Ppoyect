@@ -49,7 +49,7 @@ class Game {
     int puntaje;
 
     //coin Con tiled
-    Coin *coinTi;
+    Coin *coin;
     LinkedList<sf::Vector2<Coin*> > lista;
     ////////////////////////////////
 
@@ -90,7 +90,7 @@ public:
 
 
 
-        // Coin
+        /*// Coin
         vector<Coin*> coinVec;
         Coin coin1({20,20});
         Coin coin2({20,20});
@@ -99,7 +99,7 @@ public:
         //coin1.setPos({800, 700});
         //coin2.setPos({400, 400});
         coinVec[0]->setPos({800, 700});
-        coinVec[1]->setPos({400, 400});
+        coinVec[1]->setPos({400, 400});*/
 
         // Process events
         sf::Event event;
@@ -176,14 +176,14 @@ public:
         window.setView(camera);
         miMapa->dibujar(window);
         player->dibujar(window);
-        for(int ii = 1; ii < coinVec.size(); ii++){
+        /*for(int ii = 1; ii < coinVec.size(); ii++){
             coinVec[ii]->draw(window);
         }
         for(int ii = 0; ii < coinVec.size(); ii++){
             if(player->isCollindingWhithCoin(coinVec[ii])){
                 coinVec[ii]->setPos({500000,50000});
             }
-        }
+        }*/
         for (int ii = 0; ii < 100; ii++) {
             if (ataque[ii] != nullptr) {
                 ataque[ii]->dibujar(window, miMapa->getList());

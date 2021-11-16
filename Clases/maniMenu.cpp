@@ -11,10 +11,11 @@ maniMenu::maniMenu(float width, float height){
     menu[0].setString("Jugar");
     menu[0].setPosition(sf::Vector2f(width/5, height /(MAX_NUMBER_OF_ITEMS +1)*0.5));
 
+    std::string wasd = "5";
     menu[1].setFont(font);
     menu[1].setColor(sf::Color::White);
     menu[1].getCharacterSize();
-    menu[1].setString("Puntajes");
+    menu[1].setString(wasd);
     menu[1].setPosition(sf::Vector2f(width/5, height /(MAX_NUMBER_OF_ITEMS +1)*1));
 
     menu[2].setFont(font);

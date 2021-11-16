@@ -2,6 +2,7 @@
 #define MAIN_CPP_MANIMENU_H
 
 #include "SFML/Graphics.hpp"
+#include <string>
 
 #define MAX_NUMBER_OF_ITEMS 3
 
@@ -15,6 +16,7 @@ public:
     void MoveUp();
     void MoveDown();
     int GetPressedItem() {return selectedItemIndex;}
+
 private:
     int selectedItemIndex;
     sf::Font font;
