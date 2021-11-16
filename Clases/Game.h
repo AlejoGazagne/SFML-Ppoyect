@@ -5,7 +5,7 @@
 #include <stack>
 #include "enemigos.h"
 #include "Coin.h"
-
+#include "Vida.h"
 enum fases {
     WIN,
     GAME,
@@ -52,10 +52,10 @@ class Game {
     Coin *coin;
     LinkedList<sf::Vector2<Coin*> > lista;
     ////////////////////////////////
+    vector<Coin*> coinVec;
 
 
-    //vida
-    int vidas;
+
 
 
 public:
@@ -87,6 +87,12 @@ public:
 
     int loop(sf::RenderWindow &window){
         deltaTime = delta.restart().asSeconds();
+
+
+        //Vida
+        Vida vida();
+
+
 
 
 

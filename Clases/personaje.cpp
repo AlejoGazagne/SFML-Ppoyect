@@ -112,4 +112,7 @@ Personaje::Personaje(int vidas) : vidas(vidas) {
     txt_vidas->setString("Hola");
     txt_vidas->setPosition(400, 300);
     txt_vidas->setColor(sf::Color::Green);
+
+
+
 }
