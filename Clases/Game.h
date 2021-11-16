@@ -6,6 +6,7 @@
 #include "enemigos.h"
 #include "Coin.h"
 #include "Vida.h"
+#include "Coin.h"
 
 enum fases {
     WIN,
@@ -16,6 +17,7 @@ enum fases {
 int look_empty(Ataque *ataque[]);
 
 class Game {
+    fases state;
     sf::Window window;
     sf::View camera;
     int time = 70, a = 0;
@@ -41,18 +43,15 @@ class Game {
     sf::Sprite image_Mapa;
     // ENEMIGOS
     Enemigos *enem;
-    LinkedList<Enemigos*> en;
+    LinkedList<Enemigos*> enemy;
 
-    fases state;
+    //coin Con tiled
+    Coin *moni;
+    queue<Coin *> moneda;
 
     // Tiempo de juego
     int tiempoJuego = 0;
     int puntaje;
-
-    //coin Con tiled
-    LinkedList<int >lista;
-
-
 
 public:
 
@@ -74,9 +73,8 @@ public:
         if (!tx_ataque.loadFromFile("assets/espada.png"))
             cout << "No se pudo cargar espada.png" << endl;
 
-        miMapa = new MapaTMX("assets/Mapa/Mapa.tmx", tx_player, &en, lista);
+        miMapa = new MapaTMX("assets/Mapa/Mapa.tmx", tx_player, &enemy, &moneda);
         player = miMapa->getPlayer();
-
 
 
     }
@@ -140,8 +138,6 @@ public:
         cPos.y = 480;
 
 
-
-
         /*if(tiempoJuego/60 > 10){
             tiempoJuego = 0;
             state = GAMEOVER;
@@ -156,10 +152,9 @@ public:
         window.setView(camera);
         miMapa->dibujar(window);
         player->dibujar(window);
-        for (en.iterInit(); !en.iterEnd(); en.iterNext()) {
-            window.draw(en.iterGet()->getSprite());
+        for (enemy.iterInit(); !enemy.iterEnd(); enemy.iterNext()) {
+            window.draw(enemy.iterGet()->getSprite());
         }
-        //vida.draw(window);
         /*for(int ii = 1; ii < coinVec.size(); ii++){
             coinVec[ii]->draw(window);
         }

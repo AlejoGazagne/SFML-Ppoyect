@@ -28,10 +28,7 @@ private:
     sf::Sprite sp;
     sf::Texture tx;
     // Vidas
-    int vidas;
-    queue<int> vida;
-    sf::Texture tx_Vida;
-    sf::Sprite image_Vida;
+
 
 public:
     Personaje(int x, int y, const sf::Texture &tx);

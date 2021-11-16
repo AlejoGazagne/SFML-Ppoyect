@@ -7,23 +7,15 @@
 
 class Coin {
 public:
-    Coin(sf::Vector2f size){
-        coin.setSize(size);
-        coin.setFillColor(sf::Color::Yellow);
-    }
-    void draw(sf::RenderWindow &window){
-        window.draw(coin);
-    }
-    sf::Vector2f getPosition(){
-        return coin.getPosition();
-    }
-    void setPos(sf::Vector2f newPos){
-        coin.setPosition(newPos);
-    }
+    Coin(sf::Vector2f pos);
+
+    void draw(sf::RenderWindow &window);
+
+    sf::Vector2f getPosition();
+
 
 private:
     sf::RectangleShape coin;
-    int posx, posy;
 };
 
 

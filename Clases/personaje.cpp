@@ -103,7 +103,7 @@ bool Personaje::getJumping() {
 
 }
 
-Personaje::Personaje(int vidas) : vidas(vidas) {
+/*Personaje::Personaje(int vidas) : vidas(vidas) {
 
     fuente1 = new sf::Font();
     txt_vidas = new sf::Text();
@@ -115,4 +115,4 @@ Personaje::Personaje(int vidas) : vidas(vidas) {
 
 
 
-}
+}*/
