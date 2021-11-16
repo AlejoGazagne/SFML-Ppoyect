@@ -22,11 +22,12 @@ private:
     sf::Vector2u tile_size;
     uint32_t columns;
     Personaje *player;
+    Enemigos *enemy;
     Coin *coinTi;
 
 public:
 
-    explicit MapaTMX(const string &archivo, sf::Texture &pl_tx, LinkedList<Enemigos *> &enemies, LinkedList<sf::Vector2<Coin*> > coinT) {
+    explicit MapaTMX(const string &archivo, sf::Texture &pl_tx, LinkedList<Enemigos *> *enemies, LinkedList<int >lista) {
         if (!map.load(archivo))
             throw "Cannot open map";
 
@@ -80,7 +81,7 @@ public:
                         enemy->getSprite().setPosition(objects[j].getPosition().x, objects[j].getPosition().y);
                         enemy->getSprite().setOrigin((float) enemy->getTexture().getSize().x / 2,
                                                      (float) enemy->getTexture().getSize().y / 2);
-                        enemies.push_front(enemy);
+                        enemies->push_front(enemy);
                     }
                     if (objects[j].getName() == "player") {
                         player = new Personaje(objects[j].getPosition().x, objects[j].getPosition().y,pl_tx);

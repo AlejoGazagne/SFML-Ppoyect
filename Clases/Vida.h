@@ -13,7 +13,7 @@ public:
     void draw(sf::RenderWindow &window);
 
 private:
-    int max_vidas=4;
+    int max_vidas = 4;
     std::string Vidas; //lo que va a mostrar
     sf::Font font;
     sf::Text vida[2];

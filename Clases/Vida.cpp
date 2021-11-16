@@ -18,12 +18,12 @@ Vida::Vida() {
     vida[1].setPosition(sf::Vector2f(30,40));
 
 }
+Vida::~Vida() {
+
+}
 void Vida::draw(sf::RenderWindow &window) {
 
     for(int ii = 0; ii < 2; ii++){
         window.draw(vida[ii]);
     }
-}
-Vida::~Vida() {
-
 }

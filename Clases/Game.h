@@ -1,11 +1,12 @@
 #ifndef MAIN_CPP_GAME_H
 #define MAIN_CPP_GAME_H
-#include <queue>
 #include "LinkedList.h"
 #include <stack>
+#include <queue>
 #include "enemigos.h"
 #include "Coin.h"
 #include "Vida.h"
+
 enum fases {
     WIN,
     GAME,
@@ -49,12 +50,7 @@ class Game {
     int puntaje;
 
     //coin Con tiled
-    Coin *coin;
-    LinkedList<sf::Vector2<Coin*> > lista;
-    ////////////////////////////////
-    vector<Coin*> coinVec;
-
-
+    LinkedList<int >lista;
 
 
 
@@ -78,7 +74,7 @@ public:
         if (!tx_ataque.loadFromFile("assets/espada.png"))
             cout << "No se pudo cargar espada.png" << endl;
 
-        miMapa = new MapaTMX("assets/Mapa/Mapa.tmx", tx_player, en, lista);
+        miMapa = new MapaTMX("assets/Mapa/Mapa.tmx", tx_player, &en, lista);
         player = miMapa->getPlayer();
 
 
@@ -88,24 +84,9 @@ public:
     int loop(sf::RenderWindow &window){
         deltaTime = delta.restart().asSeconds();
 
-
         //Vida
         Vida vida();
 
-
-
-
-
-        /*// Coin
-        vector<Coin*> coinVec;
-        Coin coin1({20,20});
-        Coin coin2({20,20});
-        coinVec.push_back(&coin1);
-        coinVec.push_back(&coin2);
-        //coin1.setPos({800, 700});
-        //coin2.setPos({400, 400});
-        coinVec[0]->setPos({800, 700});
-        coinVec[1]->setPos({400, 400});*/
 
         // Process events
         sf::Event event;
@@ -159,14 +140,7 @@ public:
         cPos.y = 480;
 
 
-        /*for (en.iterInit(); !en.iterEnd(); en.iterNext()) {
-            int ii = 0;
-            enem = en.get(ii);
-            enem->dibujar(window);
-            cout<<"Revisa la lista de enemigos"<<endl;
-            ii++;
-            en.remove(ii);
-        }*/
+
 
         /*if(tiempoJuego/60 > 10){
             tiempoJuego = 0;
@@ -182,6 +156,10 @@ public:
         window.setView(camera);
         miMapa->dibujar(window);
         player->dibujar(window);
+        for (en.iterInit(); !en.iterEnd(); en.iterNext()) {
+            window.draw(en.iterGet()->getSprite());
+        }
+        //vida.draw(window);
         /*for(int ii = 1; ii < coinVec.size(); ii++){
             coinVec[ii]->draw(window);
         }
