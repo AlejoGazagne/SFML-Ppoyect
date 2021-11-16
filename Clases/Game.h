@@ -120,7 +120,7 @@ public:
         for (int ii = 0; ii < 100; ii++) {
             if (ataque[ii] != nullptr) {
                 ataque[ii]->simular();
-                if(ataque[ii]->dibujar(window, miMapa->getList()) == true){
+                if(ataque[ii]->dibujar(window, miMapa->getList(), enemy) == true){
                     delete ataque[ii];
                     ataque[ii] = nullptr;
                 }
@@ -138,11 +138,11 @@ public:
         cPos.y = 480;
 
 
-        /*if(tiempoJuego/60 > 10){
-            tiempoJuego = 0;
+        if(tiempoJuego/60 > 35){
+            //tiempoJuego = 0;
             state = GAMEOVER;
             return state+1;
-        }*/
+        }
 
         time++;
         tiempoJuego++;
@@ -155,6 +155,7 @@ public:
         for (enemy.iterInit(); !enemy.iterEnd(); enemy.iterNext()) {
             window.draw(enemy.iterGet()->getSprite());
         }
+        //enem->mover(deltaTime, 200, 200);
         /*for(int ii = 1; ii < coinVec.size(); ii++){
             coinVec[ii]->draw(window);
         }
@@ -165,7 +166,7 @@ public:
         }*/
         for (int ii = 0; ii < 100; ii++) {
             if (ataque[ii] != nullptr) {
-                ataque[ii]->dibujar(window, miMapa->getList());
+                ataque[ii]->dibujar(window, miMapa->getList(), enemy);
             }
         }
         auto list = miMapa->getList();

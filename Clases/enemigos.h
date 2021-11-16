@@ -2,14 +2,13 @@
 #define MAIN_CPP_ENEMIGOS_H
 
 #include <SFML/Graphics.hpp>
+#include "Animator.h"
 #include "LinkedList.h"
 
 class Enemigos {
 private:
-    float gravityAcceleration = 9.8;
-    int x, y;
-    float speedY, speedX;
-    sf::Vector2f oldPos;
+
+    int movementSpeed = 3;
 
     sf::Texture *tEnemy;
     sf::Sprite *sEnemy;
@@ -19,8 +18,9 @@ public:
     sf::Sprite &getSprite ();
     sf::Texture &getTexture ();
     void dibujar(sf::RenderWindow &w);
+    void mover(const float& dt, float y, float x);
 
-    void colision(LinkedList<sf::Rect<float> *> list, float deltaTime);
+    //void colision(LinkedList<sf::Rect<float> *> list, float deltaTime);
 
 
 };

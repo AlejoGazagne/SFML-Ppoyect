@@ -35,7 +35,6 @@ public:
 
     Personaje(int vidas);
 
-
     void dibujar(sf::RenderWindow &w);
 
     void moverDerecha(float deltaTime);
@@ -61,8 +60,9 @@ public:
         }
         return false;
     }
+
     //vidas
- sf::Font *fuente1;
+    sf::Font *fuente1;
     sf::Text * txt_vidas;
 
 };

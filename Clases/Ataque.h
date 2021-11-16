@@ -1,6 +1,7 @@
 #ifndef PERSONAJE1_H_ATAQUE_H
 #define PERSONAJE1_H_ATAQUE_H
 #include <SFML/Graphics.hpp>
+#include "enemigos.h"
 #include "LinkedList.h"
 
 #define VEL_ATAQUE 18
@@ -14,9 +15,10 @@ private:
     bool left;
 public:
     Ataque(sf::Vector2f pos, bool left, const sf::Texture &tx);
-    bool dibujar(sf::RenderWindow &w, LinkedList<sf::Rect<float> *> list);
+    bool dibujar(sf::RenderWindow &w, LinkedList<sf::Rect<float> *> list, LinkedList<Enemigos*> enemy);
     void simular();
-    int getTimeout() const;
+
+    //int getTimeout() const;
 };
 
 

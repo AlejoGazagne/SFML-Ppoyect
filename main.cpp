@@ -44,6 +44,7 @@ int main() {
                                     break;
                                 case 3:
                                     maniMenu menu(1536, 850);
+                                    men = 1;
                                     break;
                             }
                             break;

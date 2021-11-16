@@ -2,8 +2,8 @@
 #include <cmath>
 
 Ataque::Ataque(sf::Vector2f pos, bool left, const sf::Texture &tx) {
-    posx = sp.getPosition().x;
-    posy = sp.getPosition().y;
+    //posx = sp.getPosition().x;
+    //posy = sp.getPosition().y;
     sp.setOrigin(sp.getGlobalBounds().width /2, sp.getGlobalBounds().height/2 );
     this->left = left;
     if (left)
@@ -13,27 +13,21 @@ Ataque::Ataque(sf::Vector2f pos, bool left, const sf::Texture &tx) {
     timeout = 200;
 }
 
-/*bool colisiones(LinkedList<sf::Rect<float> *> list, int posx){
-    sf::Rect<float> *miRectangulo;
-
-    for(int ii = 0; ii < list.getSize(); ii++){
-        miRectangulo = list.get(ii);
-        if(posx == miRectangulo){
-            return true;
-        }
-    }
-    return false;
-}*/
-
-bool Ataque::dibujar(sf::RenderWindow &w, LinkedList<sf::Rect<float> *> list) {
+bool Ataque::dibujar(sf::RenderWindow &w, LinkedList<sf::Rect<float> *> list, LinkedList<Enemigos*> enemy) {
     w.draw(sp);
     sf::Rect<float> *miRectangulo;
+    //sf::Vector2f *enemigo;
 
     for(int ii = 0; ii < list.getSize(); ii++){
         miRectangulo = list.get(ii);
+        //enemigo = enemy.get(ii);
+
         if(sp.getGlobalBounds().intersects(*miRectangulo)){
             return true;
         }
+        /*if(sp.getGlobalBounds().intersects(enemy)){
+
+        }*/
     }
     return false;
 }
@@ -48,6 +42,6 @@ void Ataque::simular() {
     timeout--;
 }
 
-int Ataque::getTimeout() const {
+/*int Ataque::getTimeout() const {
     return timeout;
-}
+}*/
