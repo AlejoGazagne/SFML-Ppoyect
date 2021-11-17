@@ -1,5 +1,6 @@
 #include "Ataque.h"
 #include <cmath>
+#include <iostream>
 
 Ataque::Ataque(sf::Vector2f pos, bool left, const sf::Texture &tx) {
     //posx = sp.getPosition().x;
@@ -16,18 +17,22 @@ Ataque::Ataque(sf::Vector2f pos, bool left, const sf::Texture &tx) {
 bool Ataque::dibujar(sf::RenderWindow &w, LinkedList<sf::Rect<float> *> list, LinkedList<Enemigos*> enemy) {
     w.draw(sp);
     sf::Rect<float> *miRectangulo;
-    //sf::Vector2f *enemigo;
+    sf::Rect<float> enemigo;
 
-    for(int ii = 0; ii < list.getSize(); ii++){
-        miRectangulo = list.get(ii);
-        //enemigo = enemy.get(ii);
+    for(list.iterInit(); !list.iterEnd(); list.iterNext()){
+        miRectangulo = list.iterGet();
 
         if(sp.getGlobalBounds().intersects(*miRectangulo)){
             return true;
         }
-        /*if(sp.getGlobalBounds().intersects(enemy)){
-
-        }*/
+    }
+    for(enemy.iterInit(); !enemy.iterEnd(); enemy.iterNext()){
+        enemigo = enemy.iterGet()->getSprite().getGlobalBounds();
+        if (sp.getGlobalBounds().intersects(enemigo)) {
+            std::cout << "Choqué Enemigo" << std::endl;
+            // enemy.restarVida();
+            return true;
+        }
     }
     return false;
 }
