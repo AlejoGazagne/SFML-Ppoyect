@@ -1,4 +1,5 @@
 #include "Ataque.h"
+#include "enemigos.h"
 #include <cmath>
 
 Ataque::Ataque(sf::Vector2f pos, bool left, const sf::Texture &tx) {
@@ -16,18 +17,21 @@ Ataque::Ataque(sf::Vector2f pos, bool left, const sf::Texture &tx) {
 bool Ataque::dibujar(sf::RenderWindow &w, LinkedList<sf::Rect<float> *> list, LinkedList<Enemigos*> enemy) {
     w.draw(sp);
     sf::Rect<float> *miRectangulo;
-    //sf::Vector2f *enemigo;
+    sf::Vector2f *enemigo;
+    //sf::Rect<float> enemigo;
+    Enemigos *enem;
+    sf::Sprite en;
 
     for(int ii = 0; ii < list.getSize(); ii++){
         miRectangulo = list.get(ii);
-        //enemigo = enemy.get(ii);
+        en = enem->getSprite();
 
         if(sp.getGlobalBounds().intersects(*miRectangulo)){
             return true;
         }
-        /*if(sp.getGlobalBounds().intersects(enemy)){
-
-        }*/
+        if(sp.getGlobalBounds().intersects(en.getGlobalBounds())){
+            return true;
+        }
     }
     return false;
 }
