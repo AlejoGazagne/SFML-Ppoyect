@@ -4,6 +4,7 @@
 #include "LinkedList.h"
 #include <stack>
 #include <queue>
+#include <thread>
 #include <fstream>
 #include "enemigos.h"
 #include "../main.h"
@@ -87,7 +88,7 @@ public:
 
     }
 
-    void loop(sf::RenderWindow &window) {
+    state loop(sf::RenderWindow &window) {
         deltaTime = delta.restart().asSeconds();
 
         // Mover player
@@ -144,12 +145,14 @@ public:
         for (int ii = 0; ii < enemy.getSize(); ii++) {
             enemy.get(ii)->mover(deltaTime, player->getPos().y, player->getPos().x, miMapa->getList());
             window.draw(enemy.get(ii)->getSprite());
-            if(enemy.get(ii)->getSprite().getGlobalBounds().intersects({player->getPos().x-10, player->getPos().y+10, 30, 30})){
-                if(cooldownVida <= 0){
+            if (enemy.get(ii)->getSprite().getGlobalBounds().intersects(
+                    {player->getPos().x - 10, player->getPos().y + 10, 30, 30})) {
+                if (cooldownVida <= 0) {
                     vida.pop();
-                    if(vida.empty()){
+                    if (vida.empty()) {
                         nextState = GAMEOVER;
-                        return ;
+                        writeTable();
+                        return GAMEOVER;
                     }
                     cooldownVida = 120;
                 }
@@ -162,7 +165,9 @@ public:
         }
 
         if (enemy.getSize() == 0) {
+            writeTable();
             nextState = GAMEOVER;
+            return GAMEOVER;
         }
         for (int ii = 0; ii < moneda.size(); ii++) {
             moni = moneda.front();
@@ -175,28 +180,25 @@ public:
         if (!font.loadFromFile("assets/letra.ttf")) {
             //handle error
         }
-        cout<<vida.size()<<endl;
 
         // DIBUJAR VIDAS
-        //for (int ii = 0; ii < vida.size(); ii++) {
-            vi = vida.top();
-            life.setFont(font);
-            life.setFillColor(sf::Color::White);
+        vi = vida.top();
+        life.setFont(font);
+        life.setFillColor(sf::Color::White);
 
-            porVida.str("");
-            porVida << "x " << vida.size() << endl;
+        porVida.str("");
+        porVida << "x " << vida.size() << endl;
 
-            life.setString(porVida.str());
-            if (player->getPos().x > 1200) {
-                life.setPosition(sf::Vector2f(1340, 5));
-            }
-            if (player->getPos().x < 1200) {
-                life.setPosition(sf::Vector2f(40, 5));
-            }
+        life.setString(porVida.str());
+        if (player->getPos().x > 1200) {
+            life.setPosition(sf::Vector2f(1340, 5));
+        }
+        if (player->getPos().x < 1200) {
+            life.setPosition(sf::Vector2f(40, 5));
+        }
 
-            window.draw(life);
-            vi->draw(window);
-        //}
+        window.draw(life);
+        vi->draw(window);
 
 
         for (int ii = 0; ii < 100; ii++) {
@@ -216,6 +218,7 @@ public:
         }
 #endif
         window.display();
+        return JUEGO;
     }
 
     void writeTable() const {
@@ -236,14 +239,6 @@ public:
         return -1;
     }
 
-    virtual ~Game() {
-        writeTable();
-    }
-
-    state events(sf::Event event) {
-        // Verificar si está el evento de tecla esc
-        return nextState;
-    }
 };
 
 #endif //MAIN_CPP_GAME_H

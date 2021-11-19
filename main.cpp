@@ -11,13 +11,12 @@
 
 int main() {
     state estado = MENU;
-    int wasd = 0;
     //Crear ventana y mostrar el mapa
     sf::RenderWindow window(sf::VideoMode(1536, 850), "Proyecto Info II");
     window.setFramerateLimit(60);
 
     maniMenu menu(1536, 850);
-    Game juego(window);
+    Game *juego = new Game(window);
     GameOver gameover;
 
     while (window.isOpen()) {
@@ -32,32 +31,33 @@ int main() {
 
             switch (estado) {
                 case MENU:
-                    estado = menu.events(event);
+                    menu.events(event);
                     break;
-                case JUEGO:
-                    estado = juego.events(event);
-                    break;
-                case GAMEOVER:
-                    estado = gameover.events(event);
             }
         }
 
         // DIBUJO Escena
+        cout << estado << endl;
         switch (estado) {
             case MENU:
-                menu.draw(window);
+                estado = menu.draw(window);
                 break;
             case JUEGO:
-                juego.loop(window);
+                estado = juego->loop(window);
+                if (estado != JUEGO) {
+                    delete juego;
+                    juego = new Game(window);
+                }
+                menu.setNextState(MENU);
                 break;
             case GAMEOVER:
-                gameover.draw(window);
-                /*if(wasd = 480){
-                    estado = MENU;
-                }*/
+                estado = gameover.draw(window);
+                menu.setNextState(MENU);
+                break;
+            case EXIT:
+                window.close();
                 break;
         }
-        wasd++;
     }
     return EXIT_SUCCESS;
 }

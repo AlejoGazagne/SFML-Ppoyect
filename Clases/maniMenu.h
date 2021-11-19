@@ -11,13 +11,16 @@ class maniMenu {
 
 public:
     maniMenu(float width, float height);
-    state events(sf::Event e);
-    void draw(sf::RenderWindow &window);
+    void events(sf::Event e);
+    state draw(sf::RenderWindow &window);
     void MoveUp();
     void MoveDown();
 
+    void setNextState(state nextState);
+
 private:
     state selectedItemIndex;
+    state nextState;
     sf::Font font;
     sf::Text menu[MAX_NUMBER_OF_ITEMS];
     sf::Texture texture1;

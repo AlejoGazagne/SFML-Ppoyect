@@ -1,35 +1,42 @@
 #include "GameOver.h"
 #include <fstream>
 #include <iostream>
+#include <thread>
 
-void GameOver::draw(sf::RenderWindow &window) {
+state GameOver::draw(sf::RenderWindow &window) {
     // IMPRIMIR POR PANTALLA LOS PUNTAJES
 
     Olddata.setFont(font);
     Olddata.setFillColor(sf::Color::White);
     Olddata.setString(pantalla);
-    Olddata.setPosition(500,500);
+    Olddata.setPosition(100, 100);
 
     window.clear();
     window.draw(Olddata);
     window.display();
-}
-
-state GameOver::events(sf::Event event) {
+    timeout++;
+    if (timeout > 480) {
+        timeout = 0;
+        return MENU;
+    }
     return GAMEOVER;
 }
 
 GameOver::GameOver() {
+
+    std::this_thread::sleep_for(1000ms);
     if (!font.loadFromFile("assets/letra.ttf")) {
         //handle error
     }
+    string line;
     pantalla = "";
     std::ifstream ifs;
+    timeout = 0;
 
     ifs.open("Tabla.txt");
-    if(ifs.is_open()){
-        while (!ifs.eof()){
-            pantalla += ifs.get();
+    if (ifs.is_open()) {
+        while (getline(ifs, line)) {
+            pantalla += line + '\n';
         }
         ifs.close();
     }

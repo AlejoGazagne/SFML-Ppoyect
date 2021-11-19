@@ -28,11 +28,12 @@ maniMenu::maniMenu(float width, float height) {
     menu[2].setPosition(sf::Vector2f(width / 5, height / (MAX_NUMBER_OF_ITEMS + 1) * 1.5));
 
     selectedItemIndex = JUEGO;
+    nextState = MENU;
 
 }
 
 
-void maniMenu::draw(sf::RenderWindow &window) {
+state maniMenu::draw(sf::RenderWindow &window) {
     for (auto &ii : menu) {
         ii.setFillColor(sf::Color::Black);
     }
@@ -55,6 +56,7 @@ void maniMenu::draw(sf::RenderWindow &window) {
         window.draw(ii);
     }
     window.display();
+    return nextState;
 }
 
 void maniMenu::MoveUp() {
@@ -83,7 +85,7 @@ void maniMenu::MoveDown() {
     }
 }
 
-state maniMenu::events(sf::Event event) {
+void maniMenu::events(sf::Event event) {
     switch (event.type) {
         case sf::Event::KeyReleased:
             switch (event.key.code) {
@@ -95,7 +97,7 @@ state maniMenu::events(sf::Event event) {
                     break;
                 case sf::Keyboard::Return:
                     // ver que paso
-                    return selectedItemIndex;
+                    nextState = selectedItemIndex;
                 default:
                     break;
             }
@@ -103,5 +105,8 @@ state maniMenu::events(sf::Event event) {
         default:
             break;
     }
-    return MENU;
+}
+
+void maniMenu::setNextState(state nextState) {
+    maniMenu::nextState = nextState;
 }

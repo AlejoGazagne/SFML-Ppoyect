@@ -10,12 +10,11 @@ class GameOver {
     string pantalla;
     sf::Text Olddata;
     sf::Font font;
+    int timeout;
 public:
     GameOver();
 
-    state events(sf::Event event);
-
-    void draw(sf::RenderWindow &window);
+    state draw(sf::RenderWindow &window);
 };
 
 
