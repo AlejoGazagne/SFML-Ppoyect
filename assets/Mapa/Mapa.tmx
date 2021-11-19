@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="60" height="20" tilewidth="48" tileheight="48" infinite="0" nextlayerid="3" nextobjectid="98">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="60" height="20" tilewidth="48" tileheight="48" infinite="0" nextlayerid="3" nextobjectid="114">
  <tileset firstgid="1" name="Final" tilewidth="48" tileheight="48" tilecount="1200" columns="60">
   <image source="Final.png" width="2880" height="960"/>
  </tileset>
@@ -80,13 +80,13 @@
   <object id="64" name="Pared" x="1920.36" y="610.773" width="48.5" height="13"/>
   <object id="65" name="Pared" x="2735" y="514.75" width="96.6667" height="15.1666"/>
   <object id="66" name="Pared" x="2641" y="384.833" width="45.6667" height="14.6667"/>
-  <object id="67" name="Enemigo" x="414.667" y="717.334">
+  <object id="67" name="Enemigo" x="520.667" y="695.334">
    <point/>
   </object>
   <object id="68" name="Enemigo" x="825.333" y="186.667">
    <point/>
   </object>
-  <object id="69" name="Enemigo" x="1009.33" y="581.333">
+  <object id="69" name="Enemigo" x="983.33" y="556.333">
    <point/>
   </object>
   <object id="70" name="Enemigo" x="469.334" y="196">
@@ -98,22 +98,22 @@
   <object id="82" name="Enemigo" x="697.333" y="586.667">
    <point/>
   </object>
-  <object id="84" name="Enemigo" x="785.333" y="866.667">
+  <object id="84" name="Enemigo" x="808.333" y="891.667">
    <point/>
   </object>
-  <object id="85" name="Enemigo" x="537.333" y="860">
+  <object id="85" name="Enemigo" x="541.333" y="891">
    <point/>
   </object>
-  <object id="86" name="Enemigo" x="1290.67" y="685.333">
+  <object id="86" name="Enemigo" x="1285.67" y="703.333">
    <point/>
   </object>
   <object id="87" name="Enemigo" x="1589.33" y="342.667">
    <point/>
   </object>
-  <object id="88" name="Enemigo" x="1420" y="116">
+  <object id="88" name="Enemigo" x="1450" y="134">
    <point/>
   </object>
-  <object id="89" name="Enemigo" x="1866" y="134">
+  <object id="89" name="Enemigo" x="1864" y="154">
    <point/>
   </object>
   <object id="90" name="Enemigo" x="2248" y="156">
@@ -128,7 +128,7 @@
   <object id="93" name="Enemigo" x="2334" y="452">
    <point/>
   </object>
-  <object id="94" name="Enemigo" x="2102" y="594">
+  <object id="94" name="Enemigo" x="2152" y="592">
    <point/>
   </object>
   <object id="95" name="Enemigo" x="1928" y="754">
@@ -138,6 +138,54 @@
    <point/>
   </object>
   <object id="97" name="Enemigo" x="2192" y="764">
+   <point/>
+  </object>
+  <object id="98" name="Coin" x="992" y="670.667">
+   <point/>
+  </object>
+  <object id="99" name="Coin" x="438.667" y="600">
+   <point/>
+  </object>
+  <object id="100" name="Coin" x="589.333" y="249.333">
+   <point/>
+  </object>
+  <object id="101" name="Coin" x="1200" y="585.333">
+   <point/>
+  </object>
+  <object id="102" name="Coin" x="1372" y="105.333">
+   <point/>
+  </object>
+  <object id="103" name="Coin" x="1369.33" y="428">
+   <point/>
+  </object>
+  <object id="104" name="Coin" x="2008" y="128">
+   <point/>
+  </object>
+  <object id="105" name="Coin" x="2404" y="482">
+   <point/>
+  </object>
+  <object id="106" name="Coin" x="1808" y="406">
+   <point/>
+  </object>
+  <object id="107" name="Coin" x="1802" y="628">
+   <point/>
+  </object>
+  <object id="108" name="Coin" x="2790" y="788">
+   <point/>
+  </object>
+  <object id="109" name="Coin" x="2082" y="688">
+   <point/>
+  </object>
+  <object id="110" name="Vida" x="50" y="64">
+   <point/>
+  </object>
+  <object id="111" name="Vida" x="100" y="64">
+   <point/>
+  </object>
+  <object id="112" name="Vida" x="150" y="64">
+   <point/>
+  </object>
+  <object id="113" name="Vida" x="200" y="64">
    <point/>
   </object>
  </objectgroup>

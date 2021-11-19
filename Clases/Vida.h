@@ -1,24 +1,19 @@
-#include "SFML/Graphics.hpp"
-
 #ifndef PERSONAJE_H_VIDA_H
 #define PERSONAJE_H_VIDA_H
-
+#include "SFML/Graphics.hpp"
 
 class Vida {
-
-public:
-    Vida();
-    ~Vida();
-
-    void draw(sf::RenderWindow &window);
-
 private:
-    int max_vidas = 4;
-    std::string Vidas; //lo que va a mostrar
-    sf::Font font;
-    sf::Text vida[2];
-    sf::Texture texture1;
-    sf::Sprite image1;
+    sf::Vector2f pos;
+    sf::Texture *tx_vida;
+    sf::Sprite *sp_vida;
+public:
+    Vida(float x, float y);
+    ~Vida();
+    void draw(sf::RenderWindow &window);
+    sf::Sprite &getSprite ();
+    sf::Texture &getTexture ();
+    void setPos(float x, float y);
 };
 
 

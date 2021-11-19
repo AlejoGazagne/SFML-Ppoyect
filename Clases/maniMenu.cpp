@@ -31,6 +31,10 @@ maniMenu::~maniMenu(){
 
 }
 
+void maniMenu::setSeleccion(int ii){
+    selectedItemIndex = ii;
+}
+
 void maniMenu::draw(sf::RenderWindow &window) {
     if (!texture1.loadFromFile("assets/menu.png")) {
         //handle error;

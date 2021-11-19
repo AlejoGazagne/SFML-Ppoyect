@@ -7,16 +7,12 @@
 
 class Coin {
 public:
-    Coin(sf::Vector2f pos);
-
+    Coin(float x, float y);
     void draw(sf::RenderWindow &window);
-
     sf::Vector2f getPosition();
-
-
 private:
     sf::RectangleShape coin;
+    sf::Vector2f position;
 };
-
 
 #endif //ENEMIGOS_H_COIN_H

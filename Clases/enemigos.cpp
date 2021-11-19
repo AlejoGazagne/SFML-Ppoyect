@@ -1,6 +1,7 @@
 #include "enemigos.h"
 
 Enemigos::Enemigos(){
+    vidas = 3;
     tEnemy = new sf::Texture;
     sEnemy = new sf::Sprite;
 
@@ -10,10 +11,12 @@ Enemigos::Enemigos(){
     sEnemy->setOrigin(((float)sEnemy->getTexture()->getSize().x)/2,((float)sEnemy->getTexture()->getSize().y)/2);
 
 }
-void Enemigos::mover(const float& dt, float y, float x){
-    float posX;
-    float posY;
-    float angle;
+void Enemigos::mover(const float& dt, float y, float x, LinkedList<sf::Rect<float> *> list){
+    float Posx = x;
+    float Posy = y;
+
+    oldPos.x = sEnemy->getPosition().x;
+    oldPos.y = sEnemy->getPosition().y;
 
     if(this->getSprite().getPosition().x < x){
         this->sEnemy->move(1.f * this->movementSpeed * dt, 0.f * this->movementSpeed * dt);
@@ -21,18 +24,33 @@ void Enemigos::mover(const float& dt, float y, float x){
     if(this->getSprite().getPosition().x > x){
         this->sEnemy->move(-1.f * this->movementSpeed * dt, 0.f * this->movementSpeed * dt);
     }
-    if(this->getSprite().getPosition().y < y){
+    if(this->getSprite().getPosition().y < y - 8){
         this->sEnemy->move(0.f * this->movementSpeed * dt, 1.f * this->movementSpeed * dt);
     }
-    if(this->getSprite().getPosition().y > y){
+    if(this->getSprite().getPosition().y > y - 8){
         this->sEnemy->move(-0.f * this->movementSpeed * dt, -1.f * this->movementSpeed * dt);
     }
 
-    posX = x - this->sEnemy->getPosition().x;
-    posY = y - this->sEnemy->getPosition().y;
-    //angle = -atan2(posX,posY) * 180 / 3.14159;
+    sf::Rect<float> *miRectangulo;
 
-    this->sEnemy->setRotation(angle);
+    for(int ii = 0; ii < list.getSize(); ii++){
+        miRectangulo = list.get(ii);
+        if(sEnemy->getGlobalBounds().intersects(*miRectangulo)){
+            sEnemy->setPosition(oldPos);
+        }
+    }
+
+    Posx = x - this->sEnemy->getPosition().x;
+    Posy = y - this->sEnemy->getPosition().y;
+
+}
+
+int Enemigos::getVidas(){
+    return vidas;
+}
+
+int Enemigos::setVidas(int v) {
+    vidas = vidas - v;
 }
 
 sf::Sprite &Enemigos::getSprite() {
@@ -43,6 +61,6 @@ sf::Texture &Enemigos::getTexture() {
     return *tEnemy;
 }
 
-void Enemigos::dibujar(sf::RenderWindow &w) {
+/*void Enemigos::dibujar(sf::RenderWindow &w) {
     w.draw(*sEnemy);
-}
+}*/

@@ -1,6 +1,7 @@
-#include "Ataque.h"
 #include <cmath>
 #include <iostream>
+#include "enemigos.h"
+#include "Ataque.h"
 
 Ataque::Ataque(sf::Vector2f pos, bool left, const sf::Texture &tx) {
     //posx = sp.getPosition().x;
@@ -26,11 +27,12 @@ bool Ataque::dibujar(sf::RenderWindow &w, LinkedList<sf::Rect<float> *> list, Li
             return true;
         }
     }
-    for(enemy.iterInit(); !enemy.iterEnd(); enemy.iterNext()){
-        enemigo = enemy.iterGet()->getSprite().getGlobalBounds();
+    for(int ii = 0; ii < enemy.getSize();ii++){
+        enemigo = enemy.get(ii)->getSprite().getGlobalBounds();
         if (sp.getGlobalBounds().intersects(enemigo)) {
-            std::cout << "Choqué Enemigo" << std::endl;
-            // enemy.restarVida();
+            //std::cout << "Choqué Enemigo" << std::endl;
+            enemy.get(ii)->setVidas(1);
+            //enemy.restarVida();
             return true;
         }
     }

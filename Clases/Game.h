@@ -3,6 +3,7 @@
 #include "LinkedList.h"
 #include <stack>
 #include <queue>
+#include <fstream>
 #include "enemigos.h"
 #include "Coin.h"
 #include "Vida.h"
@@ -10,27 +11,30 @@
 
 enum fases {
     WIN,
-    GAME,
-    GAMEOVER,
+    GAME = 1,
+    GAMEOVER = 2,
     };
 
 int look_empty(Ataque *ataque[]);
 
 class Game {
-    fases state;
+    // CONTADORES
+    int tiempoJuego = 0;
+    int time = 70;
+    // VENTANA
     sf::Window window;
     sf::View camera;
-    int time = 70, a = 0;
-    sf::Vector2i cPos;
-    // Variables gravedad
+    // ESTADOS
+    fases state;
+    // VARIABLE GRABEDAD Y SALTO
     float jumpF = 400;
     float gravityAcceleration = 9.8;
-    // Gravedad
     int mass = 57;
     sf::Clock delta;
     float deltaTime;
     bool whileJump;
     // Personaje
+    sf::Vector2i cPos;
     sf::Texture tx_player;
     sf::Sprite image_player;
     Personaje *player;
@@ -44,14 +48,13 @@ class Game {
     // ENEMIGOS
     Enemigos *enem;
     LinkedList<Enemigos*> enemy;
-
-    //coin Con tiled
+    //COIN CON TILED
     Coin *moni;
     queue<Coin *> moneda;
-
-    // Tiempo de juego
-    int tiempoJuego = 0;
-    int puntaje;
+    int puntaje = 0;
+    // VIDA PERSONAJE
+    Vida *vi;
+    stack<Vida *> vida;
 
 public:
 
@@ -73,18 +76,13 @@ public:
         if (!tx_ataque.loadFromFile("assets/espada.png"))
             cout << "No se pudo cargar espada.png" << endl;
 
-        miMapa = new MapaTMX("assets/Mapa/Mapa.tmx", tx_player, &enemy, &moneda);
+        miMapa = new MapaTMX("assets/Mapa/Mapa.tmx", tx_player, &enemy, &moneda, &vida);
         player = miMapa->getPlayer();
-
 
     }
 
     int loop(sf::RenderWindow &window){
         deltaTime = delta.restart().asSeconds();
-
-        //Vida
-        Vida vida();
-
 
         // Process events
         sf::Event event;
@@ -113,7 +111,6 @@ public:
             }
         }
 
-
         player->colisiones(miMapa->getList(), deltaTime);
 
         //CREO PUNTERO ATAQUE
@@ -138,11 +135,11 @@ public:
         cPos.y = 480;
 
 
-        if(tiempoJuego/60 > 35){
+        /*if(tiempoJuego/60 > 35){
             //tiempoJuego = 0;
             state = GAMEOVER;
             return state+1;
-        }
+        }*/
 
         time++;
         tiempoJuego++;
@@ -152,24 +149,38 @@ public:
         window.setView(camera);
         miMapa->dibujar(window);
         player->dibujar(window);
-        for (enemy.iterInit(); !enemy.iterEnd(); enemy.iterNext()) {
-            window.draw(enemy.iterGet()->getSprite());
-        }
-        //enem->mover(deltaTime, 200, 200);
-        /*for(int ii = 1; ii < coinVec.size(); ii++){
-            coinVec[ii]->draw(window);
-        }
-        for(int ii = 0; ii < coinVec.size(); ii++){
-            if(player->isCollindingWhithCoin(coinVec[ii])){
-                coinVec[ii]->setPos({500000,50000});
+        for (int ii = 0; ii < enemy.getSize(); ii++) {
+            enemy.get(ii)->mover(deltaTime, player->getPos().y, player->getPos().x, miMapa->getList());
+            window.draw(enemy.get(ii)->getSprite());
+            if(enemy.get(ii)->getVidas() == 0){
+                delete this -> enemy.get(ii);
+                enemy.remove(ii);
+                puntaje = puntaje + 20;
             }
-        }*/
+
+        }
+        if(enemy.getSize() == 0){
+            state = GAMEOVER;
+            return 1;
+        }
+        for(int ii = 0; ii < moneda.size(); ii++){
+            moni = moneda.front();
+            moni->draw(window);
+            if(player->isCollindingWhithCoin(moni) == true){
+                moneda.pop();
+                puntaje = puntaje + 50;
+            }
+        }
+        for(int ii = 0; ii < vida.size(); ii++){
+            vi = vida.top();
+            window.draw(vi->getSprite());
+        }
+
         for (int ii = 0; ii < 100; ii++) {
             if (ataque[ii] != nullptr) {
                 ataque[ii]->dibujar(window, miMapa->getList(), enemy);
             }
         }
-        auto list = miMapa->getList();
 
 #ifdef DEBUG
         for (int ii = 0; ii < list.getSize(); ii++) {
@@ -182,8 +193,12 @@ public:
         }
 #endif
         window.display();
-
-        return GAME;
+        ofstream ofs;
+        ofs.open("Tabla.txt");
+        ofs<<"Datos de la Partida"<<"\n"<<"Puntos:"<<puntaje<<"\n"<<"Tiempo:"<<tiempoJuego/60<<" Segundos"<<endl;
+        ofs<<endl;
+        //ofs.close();
+        return 0;
     }
 
     int look_empty(Ataque *ataque[]) {

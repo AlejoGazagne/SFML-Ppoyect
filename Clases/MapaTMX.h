@@ -10,6 +10,7 @@
 #include <stack>
 #include "LinkedList.h"
 #include "enemigos.h"
+#include "Vida.h"
 
 using namespace std;
 
@@ -24,10 +25,11 @@ private:
     Personaje *player;
     Enemigos *enemy;
     Coin *monei;
+    Vida *vi;
 
 public:
 
-    explicit MapaTMX(const string &archivo, sf::Texture &pl_tx, LinkedList<Enemigos *> *enemies, queue<Coin *> *moneda) {
+    explicit MapaTMX(const string &archivo, sf::Texture &pl_tx, LinkedList<Enemigos *> *enemies, queue<Coin *> *moneda, stack<Vida *> *vida) {
         if (!map.load(archivo))
             throw "Cannot open map";
 
@@ -87,8 +89,12 @@ public:
                         player = new Personaje(objects[j].getPosition().x, objects[j].getPosition().y,pl_tx);
                     }
                     if (objects[j].getName() == "Coin") {
-                        auto *monei = new Coin(sf::Vector2f (objects[j].getPosition().x, objects[j].getPosition().y));
+                        auto *monei = new Coin(objects[j].getPosition().x, objects[j].getPosition().y);
                         moneda->push(monei);
+                    }
+                    if(objects[j].getName() == "Vida"){
+                        auto *vi = new Vida(objects[j].getPosition().x, objects[j].getPosition().y);
+                        vida->push(vi);
                     }
                 }
             }

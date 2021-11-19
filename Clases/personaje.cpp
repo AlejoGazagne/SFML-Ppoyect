@@ -1,6 +1,4 @@
 #include "personaje.h"
-#include <cmath>
-#include <iostream>
 
 Personaje::Personaje(int x, int y, const sf::Texture &tx) : x(x), y(y), tx(tx) {
     oldPos.x = x;
@@ -28,8 +26,6 @@ void Personaje::dibujar(sf::RenderWindow &w) {
     cuadrado.setFillColor(sf::Color::Transparent);
     w.draw(cuadrado);
 #endif
-
-
 }
 
 void Personaje::colisiones(LinkedList<sf::Rect<float> *> list, float deltaTime) {
@@ -102,17 +98,3 @@ bool Personaje::getJumping() {
     return state == JUMPING;
 
 }
-
-/*Personaje::Personaje(int vidas) : vidas(vidas) {
-
-    fuente1 = new sf::Font();
-    txt_vidas = new sf::Text();
-    txt_vidas->setFont(*fuente1);
-
-    txt_vidas->setString("Hola");
-    txt_vidas->setPosition(400, 300);
-    txt_vidas->setColor(sf::Color::Green);
-
-
-
-}*/

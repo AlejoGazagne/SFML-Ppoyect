@@ -29,11 +29,10 @@ private:
     sf::Texture tx;
     // Vidas
 
-
 public:
     Personaje(int x, int y, const sf::Texture &tx);
 
-    Personaje(int vidas);
+    //Personaje(int vidas);
 
     void dibujar(sf::RenderWindow &w);
 
@@ -60,10 +59,6 @@ public:
         }
         return false;
     }
-
-    //vidas
-    sf::Font *fuente1;
-    sf::Text * txt_vidas;
 
 };
 
