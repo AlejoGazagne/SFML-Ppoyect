@@ -96,5 +96,4 @@ void Personaje::move(float deltaTime) {
 
 bool Personaje::getJumping() {
     return state == JUMPING;
-
 }

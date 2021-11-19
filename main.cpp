@@ -57,9 +57,9 @@ int main() {
                                             ifs >> oldData;
                                             ifs.close();
                                         }
-                                        Olddata.setString(oldData);
                                         Olddata.setFont(font);
                                         Olddata.setFillColor(sf::Color::White);
+                                        Olddata.setString(oldData);
                                         Olddata.setPosition(500,500);
 
                                         window.draw(Olddata);

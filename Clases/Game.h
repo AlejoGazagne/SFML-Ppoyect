@@ -57,7 +57,7 @@ class Game {
     stack<Vida *> vida;
     sf::Font font;
     sf::Text life;
-    sf::String porVida;
+    sf::Text porVida;
 
 public:
 
@@ -135,11 +135,6 @@ public:
             cPos.x = 850;
         }
         cPos.y = 480;
-        /*if(tiempoJuego/60 > 35){
-            //tiempoJuego = 0;
-            state = GAMEOVER;
-            return state+1;
-        }*/
 
         time++;
         tiempoJuego++;
@@ -157,7 +152,9 @@ public:
                 enemy.remove(ii);
                 puntaje = puntaje + 20;
             }
-
+            /*if(enemy.get(ii)->getSprite().getGlobalBounds().intersects()){
+                cout<<"Sacar vida"<<endl;
+            }*/
         }
         if(enemy.getSize() == 0){
             state = GAMEOVER;
@@ -174,23 +171,36 @@ public:
         if(!font.loadFromFile("assets/letra.ttf")){
             //handle error
         }
+        // DIBUJAR VIDAS
         for(int ii = 0; ii < vida.size(); ii++){
             vi = vida.top();
+            vi->setPos(10,10);
+            life.setFont(font);
+            life.setColor(sf::Color::White);
+            life.getCharacterSize();
+            life.setString("x");
+            porVida.setFont(font);
+            porVida.setColor(sf::Color::White);
+            porVida.getCharacterSize();
+            std::string wasd = "" + vida.size();
+            porVida.setString(wasd);
             if (player->getPos().x > 1200) {
-                vi->setPos(20,20);
+                life.setPosition(sf::Vector2f(1340, 5));
+                porVida.setPosition(sf::Vector2f(1360, 5));
+                vi->setPos(1300,10);
             }
             if (player->getPos().x < 1200) {
-                vi->setPos(60,10);
+                life.setPosition(sf::Vector2f(40, 5));
+                porVida.setPosition(sf::Vector2f(200, 5));
+                vi->setPos(10,10);
             }
+            /*if(vida.top()->getSprite().getGlobalBounds().intersects(image_player.getGlobalBounds())){
+                cout<<"Sacar vida"<<endl;
+            }*/
+            window.draw(porVida);
+            window.draw(life);
             window.draw(vi->getSprite());
         }
-
-        life.setFont(font);
-        life.setColor(sf::Color::White);
-        life.getCharacterSize();
-        life.setString("x");
-        //life.setString(vida.size());
-        window.draw(life);
 
         for (int ii = 0; ii < 100; ii++) {
             if (ataque[ii] != nullptr) {

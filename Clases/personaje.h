@@ -3,9 +3,11 @@
 
 #include <SFML/Graphics.hpp>
 #include <queue>
+#include <stack>
 #include "LinkedList.h"
 #include "Animator.h"
 #include "Coin.h"
+#include "Vida.h"
 
 using namespace std;
 
@@ -15,7 +17,6 @@ enum estados {
     IDLE,
     RUNNING,
 };
-
 class Personaje {
 private:
     float gravityAcceleration = 9.8;
@@ -25,14 +26,20 @@ private:
     estados state;
     Animator anim;
     sf::Vector2f oldPos;
+
     sf::Sprite sp;
     sf::Texture tx;
-    // Vidas
+    /*// VIDA PERSONAJE
+    Vida *vi;
+    stack<Vida *> vida;
+    sf::Font font;
+    sf::Text life;
+    sf::Text porVida;*/
 
 public:
     Personaje(int x, int y, const sf::Texture &tx);
 
-    //Personaje(int vidas);
+    sf::Texture &getTexture();
 
     void dibujar(sf::RenderWindow &w);
 

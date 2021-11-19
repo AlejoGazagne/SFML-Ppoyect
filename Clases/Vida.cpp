@@ -30,4 +30,5 @@ sf::Texture &Vida::getTexture() {
 void Vida::setPos(float x, float y){
     pos.x = x;
     pos.y = y;
+    sp_vida->setPosition(x, y);
 }
