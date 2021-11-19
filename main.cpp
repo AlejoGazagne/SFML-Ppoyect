@@ -47,7 +47,6 @@ int main() {
                                     }
                                     break;
                                     case 1:{
-                                        cout<<"Escribir el archivo"<<endl;
                                         ifstream ifs;
                                         std::string oldData;
                                         ifs.open("Tabla.txt");
@@ -71,6 +70,7 @@ int main() {
                                     window.close();
                                     break;
                                 case 3:
+                                    maniMenu menu(1536, 850);
                                     break;
                             }
                             break;

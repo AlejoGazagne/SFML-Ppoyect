@@ -55,6 +55,9 @@ class Game {
     // VIDA PERSONAJE
     Vida *vi;
     stack<Vida *> vida;
+    sf::Font font;
+    sf::Text life;
+    sf::String porVida;
 
 public:
 
@@ -127,14 +130,11 @@ public:
         //Movimiento de camara
         if (player->getPos().x > 1200) {
             cPos.x = 2030;
-            player->dibujar(window);
         }
         if (player->getPos().x < 1200) {
             cPos.x = 850;
         }
         cPos.y = 480;
-
-
         /*if(tiempoJuego/60 > 35){
             //tiempoJuego = 0;
             state = GAMEOVER;
@@ -171,10 +171,26 @@ public:
                 puntaje = puntaje + 50;
             }
         }
+        if(!font.loadFromFile("assets/letra.ttf")){
+            //handle error
+        }
         for(int ii = 0; ii < vida.size(); ii++){
             vi = vida.top();
+            if (player->getPos().x > 1200) {
+                vi->setPos(20,20);
+            }
+            if (player->getPos().x < 1200) {
+                vi->setPos(60,10);
+            }
             window.draw(vi->getSprite());
         }
+
+        life.setFont(font);
+        life.setColor(sf::Color::White);
+        life.getCharacterSize();
+        life.setString("x");
+        //life.setString(vida.size());
+        window.draw(life);
 
         for (int ii = 0; ii < 100; ii++) {
             if (ataque[ii] != nullptr) {
@@ -197,7 +213,7 @@ public:
         ofs.open("Tabla.txt");
         ofs<<"Datos de la Partida"<<"\n"<<"Puntos:"<<puntaje<<"\n"<<"Tiempo:"<<tiempoJuego/60<<" Segundos"<<endl;
         ofs<<endl;
-        //ofs.close();
+        ofs.close();
         return 0;
     }
 
