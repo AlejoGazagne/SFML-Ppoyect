@@ -1,19 +1,16 @@
 #ifndef MAIN_CPP_GAME_H
 #define MAIN_CPP_GAME_H
+
 #include "LinkedList.h"
 #include <stack>
 #include <queue>
 #include <fstream>
 #include "enemigos.h"
+#include "../main.h"
 #include "Coin.h"
 #include "Vida.h"
 #include "Coin.h"
-
-enum fases {
-    WIN,
-    GAME = 1,
-    GAMEOVER = 2,
-    };
+#include "sstream"
 
 int look_empty(Ataque *ataque[]);
 
@@ -24,8 +21,8 @@ class Game {
     // VENTANA
     sf::Window window;
     sf::View camera;
-    // ESTADOS
-    fases state;
+    state nextState;
+
     // VARIABLE GRABEDAD Y SALTO
     float jumpF = 400;
     float gravityAcceleration = 9.8;
@@ -40,14 +37,14 @@ class Game {
     Personaje *player;
     // Ataque
     Ataque **ataque = new Ataque *[100];
-    sf::Texture tx_ataque;
+    sf::Texture tx_ataque, tx_vida;
     // Mapa
     MapaTMX *miMapa;
     sf::Texture tx_Mapa;
     sf::Sprite image_Mapa;
     // ENEMIGOS
     Enemigos *enem;
-    LinkedList<Enemigos*> enemy;
+    LinkedList<Enemigos *> enemy;
     //COIN CON TILED
     Coin *moni;
     queue<Coin *> moneda;
@@ -57,7 +54,7 @@ class Game {
     stack<Vida *> vida;
     sf::Font font;
     sf::Text life;
-    sf::Text porVida;
+    stringstream porVida;
 
 public:
 
@@ -65,6 +62,7 @@ public:
         camera.reset({0, 0, 850, 480});
         window.setView(camera);
         camera.zoom(2);
+        nextState = JUEGO;
 
         // CREO LA TEXTURA DEL PERSONAJE
         if (!tx_player.loadFromFile("assets/juntos.png")) {
@@ -78,21 +76,19 @@ public:
         }
         if (!tx_ataque.loadFromFile("assets/espada.png"))
             cout << "No se pudo cargar espada.png" << endl;
+        if (!tx_vida.loadFromFile("assets/heart.png"))
+            cout << "No se pudo cargar espada.png" << endl;
 
-        miMapa = new MapaTMX("assets/Mapa/Mapa.tmx", tx_player, &enemy, &moneda, &vida);
+        miMapa = new MapaTMX("assets/Mapa/Mapa.tmx", tx_player, &enemy, &moneda);
         player = miMapa->getPlayer();
+        vida.push(new Vida(30, 30, tx_vida));
+        vida.push(new Vida(30, 30, tx_vida));
+        vida.push(new Vida(30, 30, tx_vida));
 
     }
 
-    int loop(sf::RenderWindow &window){
+    void loop(sf::RenderWindow &window) {
         deltaTime = delta.restart().asSeconds();
-
-        // Process events
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
 
         // Mover player
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
@@ -120,7 +116,7 @@ public:
         for (int ii = 0; ii < 100; ii++) {
             if (ataque[ii] != nullptr) {
                 ataque[ii]->simular();
-                if(ataque[ii]->dibujar(window, miMapa->getList(), enemy) == true){
+                if (ataque[ii]->dibujar(window, miMapa->getList(), enemy) == true) {
                     delete ataque[ii];
                     ataque[ii] = nullptr;
                 }
@@ -147,8 +143,8 @@ public:
         for (int ii = 0; ii < enemy.getSize(); ii++) {
             enemy.get(ii)->mover(deltaTime, player->getPos().y, player->getPos().x, miMapa->getList());
             window.draw(enemy.get(ii)->getSprite());
-            if(enemy.get(ii)->getVidas() == 0){
-                delete this -> enemy.get(ii);
+            if (enemy.get(ii)->getVidas() == 0) {
+                delete this->enemy.get(ii);
                 enemy.remove(ii);
                 puntaje = puntaje + 20;
             }
@@ -156,50 +152,39 @@ public:
                 cout<<"Sacar vida"<<endl;
             }*/
         }
-        if(enemy.getSize() == 0){
-            state = GAMEOVER;
-            return 1;
+        if (enemy.getSize() == 0) {
+            nextState = GAMEOVER;
         }
-        for(int ii = 0; ii < moneda.size(); ii++){
+        for (int ii = 0; ii < moneda.size(); ii++) {
             moni = moneda.front();
             moni->draw(window);
-            if(player->isCollindingWhithCoin(moni) == true){
+            if (player->isCollindingWhithCoin(moni) == true) {
                 moneda.pop();
                 puntaje = puntaje + 50;
             }
         }
-        if(!font.loadFromFile("assets/letra.ttf")){
+        if (!font.loadFromFile("assets/letra.ttf")) {
             //handle error
         }
         // DIBUJAR VIDAS
-        for(int ii = 0; ii < vida.size(); ii++){
+        for (int ii = 0; ii < vida.size(); ii++) {
             vi = vida.top();
-            vi->setPos(10,10);
             life.setFont(font);
             life.setColor(sf::Color::White);
-            life.getCharacterSize();
-            life.setString("x");
-            porVida.setFont(font);
-            porVida.setColor(sf::Color::White);
-            porVida.getCharacterSize();
-            std::string wasd = "" + vida.size();
-            porVida.setString(wasd);
+
+            porVida.str("");
+            porVida << "x " << vida.size() << endl;
+
+            life.setString(porVida.str());
             if (player->getPos().x > 1200) {
                 life.setPosition(sf::Vector2f(1340, 5));
-                porVida.setPosition(sf::Vector2f(1360, 5));
-                vi->setPos(1300,10);
             }
             if (player->getPos().x < 1200) {
                 life.setPosition(sf::Vector2f(40, 5));
-                porVida.setPosition(sf::Vector2f(200, 5));
-                vi->setPos(10,10);
             }
-            /*if(vida.top()->getSprite().getGlobalBounds().intersects(image_player.getGlobalBounds())){
-                cout<<"Sacar vida"<<endl;
-            }*/
-            window.draw(porVida);
+
             window.draw(life);
-            window.draw(vi->getSprite());
+            vi->draw(window);
         }
 
         for (int ii = 0; ii < 100; ii++) {
@@ -219,12 +204,16 @@ public:
         }
 #endif
         window.display();
+    }
+
+    void writeTable() const {
         ofstream ofs;
         ofs.open("Tabla.txt");
-        ofs<<"Datos de la Partida"<<"\n"<<"Puntos:"<<puntaje<<"\n"<<"Tiempo:"<<tiempoJuego/60<<" Segundos"<<endl;
-        ofs<<endl;
+        ofs << "Datos de la Partida" << "\n"
+            << "Puntos:" << puntaje << "\n"
+            << "Tiempo:" << tiempoJuego / 60 << " Segundos" << endl;
+        ofs << endl;
         ofs.close();
-        return 0;
     }
 
     int look_empty(Ataque *ataque[]) {
@@ -235,6 +224,14 @@ public:
         return -1;
     }
 
+    virtual ~Game() {
+        writeTable();
+    }
+
+    state events(sf::Event event) {
+        // Verificar si está el evento de tecla esc
+        return nextState;
+    }
 };
 
 #endif //MAIN_CPP_GAME_H

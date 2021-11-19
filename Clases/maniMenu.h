@@ -2,6 +2,7 @@
 #define MAIN_CPP_MANIMENU_H
 
 #include "SFML/Graphics.hpp"
+#include "../main.h"
 #include <string>
 
 #define MAX_NUMBER_OF_ITEMS 3
@@ -10,16 +11,13 @@ class maniMenu {
 
 public:
     maniMenu(float width, float height);
-    ~maniMenu();
-
+    state events(sf::Event e);
     void draw(sf::RenderWindow &window);
     void MoveUp();
     void MoveDown();
-    int GetPressedItem() {return selectedItemIndex;}
-    void setSeleccion(int ii);
 
 private:
-    int selectedItemIndex;
+    state selectedItemIndex;
     sf::Font font;
     sf::Text menu[MAX_NUMBER_OF_ITEMS];
     sf::Texture texture1;

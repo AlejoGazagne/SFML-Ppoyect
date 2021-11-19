@@ -29,7 +29,7 @@ private:
 
 public:
 
-    explicit MapaTMX(const string &archivo, sf::Texture &pl_tx, LinkedList<Enemigos *> *enemies, queue<Coin *> *moneda, stack<Vida *> *vida) {
+    explicit MapaTMX(const string &archivo, sf::Texture &pl_tx, LinkedList<Enemigos *> *enemies, queue<Coin *> *moneda) {
         if (!map.load(archivo))
             throw "Cannot open map";
 
@@ -91,10 +91,6 @@ public:
                     if (objects[j].getName() == "Coin") {
                         auto *monei = new Coin(objects[j].getPosition().x, objects[j].getPosition().y);
                         moneda->push(monei);
-                    }
-                    if(objects[j].getName() == "Vida"){
-                        auto *vi = new Vida(objects[j].getPosition().x, objects[j].getPosition().y);
-                        vida->push(vi);
                     }
                 }
             }
