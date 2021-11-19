@@ -1,15 +1,15 @@
-//
-// Created by martin on 19/11/21.
-//
-
 #ifndef PERSONAJE_H_GAMEOVER_H
 #define PERSONAJE_H_GAMEOVER_H
 
-
 #include <SFML/Graphics.hpp>
 #include "../main.h"
+#include "sstream"
+using namespace std;
 
 class GameOver {
+    string pantalla;
+    sf::Text Olddata;
+    sf::Font font;
 public:
     GameOver();
 

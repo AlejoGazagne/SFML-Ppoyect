@@ -11,18 +11,10 @@
 
 int main() {
     state estado = MENU;
+    int wasd = 0;
     //Crear ventana y mostrar el mapa
     sf::RenderWindow window(sf::VideoMode(1536, 850), "Proyecto Info II");
     window.setFramerateLimit(60);
-
-    // IMPRIMIR POR PANTALLA LOS PUNTAJES
-    sf::Text Olddata;
-    sf::Font font;
-    sf::Texture texture1;
-    sf::Sprite image1;
-    if (!font.loadFromFile("assets/letra.ttf")) {
-        //handle error
-    }
 
     maniMenu menu(1536, 850);
     Game juego(window);
@@ -60,8 +52,12 @@ int main() {
                 break;
             case GAMEOVER:
                 gameover.draw(window);
+                /*if(wasd = 480){
+                    estado = MENU;
+                }*/
                 break;
         }
+        wasd++;
     }
     return EXIT_SUCCESS;
 }

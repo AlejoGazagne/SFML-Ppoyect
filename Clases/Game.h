@@ -18,11 +18,11 @@ class Game {
     // CONTADORES
     int tiempoJuego = 0;
     int time = 70;
+    int cooldownVida = 0;
     // VENTANA
     sf::Window window;
     sf::View camera;
     state nextState;
-
     // VARIABLE GRABEDAD Y SALTO
     float jumpF = 400;
     float gravityAcceleration = 9.8;
@@ -132,6 +132,7 @@ public:
         }
         cPos.y = 480;
 
+        cooldownVida--;
         time++;
         tiempoJuego++;
         // Draw all elements
@@ -143,15 +144,23 @@ public:
         for (int ii = 0; ii < enemy.getSize(); ii++) {
             enemy.get(ii)->mover(deltaTime, player->getPos().y, player->getPos().x, miMapa->getList());
             window.draw(enemy.get(ii)->getSprite());
+            if(enemy.get(ii)->getSprite().getGlobalBounds().intersects({player->getPos().x-10, player->getPos().y+10, 30, 30})){
+                if(cooldownVida <= 0){
+                    vida.pop();
+                    if(vida.empty()){
+                        nextState = GAMEOVER;
+                        return ;
+                    }
+                    cooldownVida = 120;
+                }
+            }
             if (enemy.get(ii)->getVidas() == 0) {
                 delete this->enemy.get(ii);
                 enemy.remove(ii);
                 puntaje = puntaje + 20;
             }
-            /*if(enemy.get(ii)->getSprite().getGlobalBounds().intersects()){
-                cout<<"Sacar vida"<<endl;
-            }*/
         }
+
         if (enemy.getSize() == 0) {
             nextState = GAMEOVER;
         }
@@ -166,11 +175,13 @@ public:
         if (!font.loadFromFile("assets/letra.ttf")) {
             //handle error
         }
+        cout<<vida.size()<<endl;
+
         // DIBUJAR VIDAS
-        for (int ii = 0; ii < vida.size(); ii++) {
+        //for (int ii = 0; ii < vida.size(); ii++) {
             vi = vida.top();
             life.setFont(font);
-            life.setColor(sf::Color::White);
+            life.setFillColor(sf::Color::White);
 
             porVida.str("");
             porVida << "x " << vida.size() << endl;
@@ -185,7 +196,8 @@ public:
 
             window.draw(life);
             vi->draw(window);
-        }
+        //}
+
 
         for (int ii = 0; ii < 100; ii++) {
             if (ataque[ii] != nullptr) {
