@@ -5,13 +5,15 @@
 
 state GameOver::draw(sf::RenderWindow &window) {
     // IMPRIMIR POR PANTALLA LOS PUNTAJES
+    window.clear();
+    window.draw(fondo);
 
     Olddata.setFont(font);
     Olddata.setFillColor(sf::Color::White);
     Olddata.setString(pantalla);
-    Olddata.setPosition(100, 100);
+    Olddata.setCharacterSize(20);
+    Olddata.setPosition(280, 200);
 
-    window.clear();
     window.draw(Olddata);
     window.display();
     timeout++;
@@ -23,11 +25,15 @@ state GameOver::draw(sf::RenderWindow &window) {
 }
 
 GameOver::GameOver() {
-
     std::this_thread::sleep_for(1000ms);
     if (!font.loadFromFile("assets/letra.ttf")) {
         //handle error
     }
+    if (!textura.loadFromFile("assets/gameover.png")) {
+        //handle error;
+    }
+    fondo.setTexture(textura);
+
     string line;
     pantalla = "";
     std::ifstream ifs;

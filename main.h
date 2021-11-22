@@ -5,8 +5,8 @@
 enum state {
     MENU,
     JUEGO,
-    TABLE,
     GAMEOVER,
+    TABLE,
     EXIT
 };
 #endif //PERSONAJE_H_MAIN_H

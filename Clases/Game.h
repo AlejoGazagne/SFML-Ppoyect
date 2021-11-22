@@ -12,6 +12,9 @@
 #include "Vida.h"
 #include "Coin.h"
 #include "sstream"
+#include <chrono>
+#include <ctime>
+//#include "SFML/Audio.hpp"
 
 int look_empty(Ataque *ataque[]);
 
@@ -56,6 +59,8 @@ class Game {
     sf::Font font;
     sf::Text life;
     stringstream porVida;
+    // MUSICA
+    //sf::Music musicaFondo;
 
 public:
 
@@ -64,6 +69,13 @@ public:
         window.setView(camera);
         camera.zoom(2);
         nextState = JUEGO;
+
+        /*if (!musicaFondo.openFromFile("assets/musica.ogg")) {
+            cout << "No se pudo cargar la musica" << endl;
+        }
+        musicaFondo.setVolume(5);
+        musicaFondo.setLoop(true);
+        musicaFondo.play();*/
 
         // CREO LA TEXTURA DEL PERSONAJE
         if (!tx_player.loadFromFile("assets/juntos.png")) {
@@ -77,14 +89,17 @@ public:
         }
         if (!tx_ataque.loadFromFile("assets/espada.png"))
             cout << "No se pudo cargar espada.png" << endl;
+
         if (!tx_vida.loadFromFile("assets/heart.png"))
             cout << "No se pudo cargar espada.png" << endl;
 
         miMapa = new MapaTMX("assets/Mapa/Mapa.tmx", tx_player, &enemy, &moneda);
         player = miMapa->getPlayer();
-        vida.push(new Vida(30, 30, tx_vida));
-        vida.push(new Vida(30, 30, tx_vida));
-        vida.push(new Vida(30, 30, tx_vida));
+
+        //PILA DE VIDAS
+        vida.push(new Vida(10, 10, tx_vida));
+        vida.push(new Vida(10, 10, tx_vida));
+        vida.push(new Vida(10, 10, tx_vida));
 
     }
 
@@ -152,6 +167,7 @@ public:
                     if (vida.empty()) {
                         nextState = GAMEOVER;
                         writeTable();
+                        writePuntajes();
                         return GAMEOVER;
                     }
                     cooldownVida = 120;
@@ -166,6 +182,7 @@ public:
 
         if (enemy.getSize() == 0) {
             writeTable();
+            writePuntajes();
             nextState = GAMEOVER;
             return GAMEOVER;
         }
@@ -191,10 +208,10 @@ public:
 
         life.setString(porVida.str());
         if (player->getPos().x > 1200) {
-            life.setPosition(sf::Vector2f(1340, 5));
+            life.setPosition(sf::Vector2f(1340, 10));
         }
         if (player->getPos().x < 1200) {
-            life.setPosition(sf::Vector2f(40, 5));
+            life.setPosition(sf::Vector2f(55, 10));
         }
 
         window.draw(life);
@@ -217,6 +234,7 @@ public:
             window.draw(cuadrado);
         }
 #endif
+
         window.display();
         return JUEGO;
     }
@@ -225,8 +243,18 @@ public:
         ofstream ofs;
         ofs.open("Tabla.txt");
         ofs << "Datos de la Partida" << "\n"
-            << "Puntos:" << puntaje << "\n"
-            << "Tiempo:" << tiempoJuego / 60 << " Segundos" << endl;
+            << "Puntos: " << puntaje << "\n"
+            << "Tiempo: " << tiempoJuego / 60 << " Segundos" << endl;
+        ofs << endl;
+        ofs.close();
+    }
+
+    void writePuntajes() const {
+        ofstream ofs;
+        ofs.open("Puntajes.txt", ios::app);
+        ofs << "Datos de la Partida" << "\n"
+        << "Puntos: " << puntaje << "\n"
+        << "Tiempo: " << tiempoJuego / 60 << " Segundos" << endl;
         ofs << endl;
         ofs.close();
     }

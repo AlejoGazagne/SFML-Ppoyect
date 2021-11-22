@@ -11,6 +11,8 @@ class GameOver {
     sf::Text Olddata;
     sf::Font font;
     int timeout;
+    sf::Texture textura;
+    sf::Sprite fondo;
 public:
     GameOver();
 

@@ -1,4 +1,4 @@
 Datos de la Partida
-Puntos:0
-Tiempo:5 Segundos
+Puntos: 290
+Tiempo: 41 Segundos
 

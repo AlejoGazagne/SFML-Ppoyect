@@ -6,8 +6,7 @@
 #include "Clases/maniMenu.h"
 #include "Clases/Game.h"
 #include "Clases/GameOver.h"
-#include <fstream>
-#include "main.h"
+#include "Clases/Puntaje.h"
 
 int main() {
     state estado = MENU;
@@ -18,6 +17,7 @@ int main() {
     maniMenu menu(1536, 850);
     Game *juego = new Game(window);
     GameOver gameover;
+    Puntaje puntaje;
 
     while (window.isOpen()) {
         sf::Event event;
@@ -28,7 +28,6 @@ int main() {
                 window.close();
                 break;
             }
-
             switch (estado) {
                 case MENU:
                     menu.events(event);
@@ -37,7 +36,7 @@ int main() {
         }
 
         // DIBUJO Escena
-        cout << estado << endl;
+        //cout << estado << endl;
         switch (estado) {
             case MENU:
                 estado = menu.draw(window);
@@ -52,6 +51,10 @@ int main() {
                 break;
             case GAMEOVER:
                 estado = gameover.draw(window);
+                menu.setNextState(MENU);
+                break;
+            case TABLE:
+                estado = puntaje.draw(window);
                 menu.setNextState(MENU);
                 break;
             case EXIT:
