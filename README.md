@@ -17,10 +17,13 @@ Una vez que eliminemos a todos los fantasmas , vamos a obtener el puntaje obteni
 ## Licencia de Assets utilizados
 Mapa :
 https://blackspirestudio.itch.io/medieval-pixel-art-asset-free
+
 Personaje:
 https://szadiart.itch.io/2d-soulslike-character
+
 Enemigo:
 https://opengameart.org/content/gothicvania-patreons-collection
+
 Fuente: 
 https://www.dafont.com/es/minecraft.font?text=pixel+arial+11
 
