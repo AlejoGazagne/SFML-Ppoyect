@@ -2,22 +2,20 @@
 
 | Documento de Especificación |        |
 |-----------------------------|--------|
-| Fecha de elaboración        |  20/09 |
-| Versión                     |   1.1  |
+| Fecha de elaboración        |  20/10 |
+| Versión                     |   2.0  |
 
-**Nombre del juego**: Archers
+**Nombre del juego**: Old Castle
 
-**Descripción del juego**: Juego de shooter en dimensión 2D, en el cual combatiras contra tu oponente demostrando quién es el mejor tirador y el más escurridizo.
+**Descripción del juego**: Un juego de plataformas 2D, donde tenemos un personaje principal, estilo caballero que debe eliminar todos los fantasmas que se encuentran dentro del castillo.
 
 **Descripción del jugador**: Apto para adolescentes mayores de 13 años, que quieran disfrutar de una divertida experiencia de lucha inspirada en los cuentos de la era medieval.
 
-**Descripción del lugar o espacio donde transcurre el juego**: El juego va a transcurrir en diferentes escenarios de estilo arcade medieval. 
-https://cdn.discordapp.com/attachments/889646361010655275/889646451100090408/Mapa.jpg 
+**Descripción del lugar o espacio donde transcurre el juego**: El juego va a transcurrir en un escenario del estilo arcade medieval donde el personaje debe sortear obstáculos y simultáneamente eliminar a todos los fantasmas que se encuentran dentro del mismo.
+https://cdn.discordapp.com/attachments/884126054346788968/912522286026854430/Final.png
 
-**Descripción de los personajes**: Diferentes personajes ficticios de la época medieval, los cuales tendrán distintos poderes y habilidades.
-https://cdn.discordapp.com/attachments/889646361010655275/889647462585884702/unknown.png
-https://cdn.discordapp.com/attachments/889646361010655275/889647753624440853/unknown.png
-https://cdn.discordapp.com/attachments/889646361010655275/889647984395046983/unknown.png
-https://cdn.discordapp.com/attachments/889646361010655275/889648159398187038/unknown.png
+**Descripción de los personajes**: Un caballero de la época medieval el cual utiliza cuchillos arrojadizos para cumplir su tarea y liberar el castillo de los fantasmas que lo conquistaron.
+https://szadiart.itch.io/2d-soulslike-character
+https://cdn.discordapp.com/attachments/884126054346788968/912522487701602314/enemigo.png
 
-**Descripción de las mecánicas del juego (game play loop)**: movimientos y caída de los proyectiles, movimiento del personaje para ponerse a cubierto o en posición de ventaja. 
+**Descripción de las mecánicas del juego (game play loop)**: El juego consiste en un personaje principal el cual debe liberar el castillo de los fantasmas que lo conquistaron.
